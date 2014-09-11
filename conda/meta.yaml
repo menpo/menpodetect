@@ -1,0 +1,23 @@
+package:
+  name: hdf5able
+  version: {{ environ['MENPODETECT_VERSION'] }}
+
+requirements:
+  build:
+    - python
+    - setuptools
+
+  run:
+    - python
+    - numpy
+    - menpo
+    - dlib
+
+test:
+
+  imports:
+    - menpodetect
+
+about:
+  home: https://github.com/menpo/menpodetect/
+  license: BSD License

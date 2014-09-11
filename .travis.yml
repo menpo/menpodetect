@@ -1,0 +1,21 @@
+env:
+  - PYTHON_VERSION=2
+  - PYTHON_VERSION=3
+
+install:
+- wget https://raw.githubusercontent.com/jabooth/traviconda/master/traviconda.py -O traviconda.py
+- python traviconda.py setup $PYTHON_VERSION --channel menpo
+- export MENPODETECT_VERSION=$(python traviconda.py version)
+- export PATH=/home/travis/miniconda/bin:$PATH
+
+script:
+- python traviconda.py auto ./conda --binstaruser menpo --binstarkey $BINSTAR_KEY --pypiuser $PYPI_USERNAME  --pypipassword $PYPI_PASSWORD
+
+notifications:
+  email: false
+  webhooks:
+    urls:
+    - https://webhooks.gitter.im/e/7599ff4870c99ba51310
+    on_success: always
+    on_failure: always
+    on_start: never

@@ -1,4 +1,4 @@
-import _dlib
+import dlib
 from menpo.shape import PointCloud
 import numpy as np
 
@@ -13,7 +13,7 @@ def pointcloud_from_rect(rect):
 def dlib_detect_frontal_faces(image, add_as_landmarks=True):
     global dlib_frontal_face_detector
     if dlib_frontal_face_detector is None:
-        dlib_frontal_face_detector = _dlib.get_frontal_face_detector()
+        dlib_frontal_face_detector = dlib.get_frontal_face_detector()
     image_for_dlib = (image.as_greyscale().pixels[..., 0] *
                       255.0).astype(np.uint8)
     faces = dlib_frontal_face_detector(image_for_dlib)

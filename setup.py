@@ -12,8 +12,8 @@ versioneer.tag_prefix = 'v'  # tags are like v1.2.0
 versioneer.parentdir_prefix = project_name + '-'  # dirname like 'menpo-v1.2.0'
 
 
-requirements = ['numpy>=1.8.2',
-                'menpo>=2.3.0']
+requirements = ['numpy==1.9.0',
+                'menpo==0.3.0']
 
 
 setup(name=project_name,

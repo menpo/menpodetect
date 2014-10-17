@@ -13,7 +13,7 @@ versioneer.parentdir_prefix = project_name + '-'  # dirname like 'menpo-v1.2.0'
 
 
 requirements = ['numpy==1.9.0',
-                'menpo==0.3.0']
+                'menpo==0.4.0']
 
 
 setup(name=project_name,

@@ -13,14 +13,14 @@ versioneer.parentdir_prefix = project_name + '-'  # dirname like 'menpo-v1.2.0'
 
 
 requirements = ['numpy==1.9.0',
-                'menpo==0.4.0']
+                'menpo==0.4.0a1']
 
 
 setup(name=project_name,
       version=versioneer.get_version(),
       cmdclass=versioneer.get_cmdclass(),
-      description='Simple object detection for Menpo Images',
-      author='James Booth',
+      description='Object detection for Menpo',
+      author='The Menpo Development Team',
       author_email='james.booth08@imperial.ac.uk',
       packages=find_packages(),
       install_requires=requirements)

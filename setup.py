@@ -12,8 +12,9 @@ versioneer.tag_prefix = 'v'  # tags are like v1.2.0
 versioneer.parentdir_prefix = project_name + '-'  # dirname like 'menpo-v1.2.0'
 
 
+# Also requires the dlib package
 requirements = ['numpy==1.9.0',
-                'menpo==0.4.0a1']
+                'menpo']
 
 
 setup(name=project_name,
@@ -23,4 +24,5 @@ setup(name=project_name,
       author='The Menpo Development Team',
       author_email='james.booth08@imperial.ac.uk',
       packages=find_packages(),
+      tests_require=['nose==1.3.4'],
       install_requires=requirements)

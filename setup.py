@@ -25,4 +25,5 @@ setup(name=project_name,
       author_email='james.booth08@imperial.ac.uk',
       packages=find_packages(),
       tests_require=['nose==1.3.4'],
+      package_data={'menpodetect': ['models/opencv/*.xml']},
       install_requires=requirements)

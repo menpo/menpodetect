@@ -3,7 +3,7 @@ import dlib
 from menpo.shape import PointDirectedGraph
 import numpy as np
 from pathlib import Path
-from menpodetect.detectors import detect, _bounding_box_adj
+from menpodetect.detectors import detect
 from functools import partial
 from menpodetect.compatibility import STRING_TYPES
 
@@ -13,7 +13,7 @@ def pointgraph_from_rect(rect):
                                         (rect.bottom(), rect.left()),
                                         (rect.bottom(), rect.right()),
                                         (rect.top(), rect.right()))),
-                              _bounding_box_adj)
+                              np.array([[0, 1], [1, 2], [2, 3], [3, 0]]))
 
 
 class _dlib_detect(object):

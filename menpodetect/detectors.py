@@ -2,8 +2,6 @@ from __future__ import division
 import numpy as np
 from menpo.transform import UniformScale
 
-_bounding_box_adj = np.array([[0, 3], [2, 0], [1, 2], [1, 3]])
-
 
 def _greyscale(image):
     if image.n_channels > 1:

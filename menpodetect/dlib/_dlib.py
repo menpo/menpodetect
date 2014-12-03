@@ -19,7 +19,7 @@ def pointgraph_from_rect(rect):
 class _dlib_detect(object):
 
     def __init__(self, model):
-        if isinstance(model, STRING_TYPES):
+        if isinstance(model, STRING_TYPES) or isinstance(model, Path):
             m_path = Path(model)
             if not Path(m_path).exists():
                 raise ValueError('Model {} does not exist.'.format(m_path))
@@ -37,7 +37,7 @@ class DlibDetector(object):
         self._detector = _dlib_detect(model)
 
     def __call__(self, image, greyscale=True, image_diagonal=None,
-                 n_upscales=0, group_prefix='object'):
+                 group_prefix='object', n_upscales=0):
         detect_partial = partial(self._detector, n_upscales=n_upscales)
         return detect(detect_partial, image, greyscale=greyscale,
                       image_diagonal=image_diagonal, group_prefix=group_prefix)

@@ -11,6 +11,7 @@ requirements:
     - python
     - numpy 1.9.0
     - dlib 18.10
+    - opencv 2.4.9.1
     - menpo
 
 test:
@@ -21,6 +22,7 @@ test:
   imports:
     - menpodetect
     - menpodetect.dlib
+    - menpodetect.opencv
 
   commands:
     - python -c "import nose; nose.main()" -s menpodetect

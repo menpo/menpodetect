@@ -1,23 +1,14 @@
 from __future__ import division
+from functools import partial
+
 import dlib
-from menpo.shape import PointDirectedGraph
-import numpy as np
 from pathlib import Path
 from menpodetect.detectors import detect
-from functools import partial
 from menpodetect.compatibility import STRING_TYPES
-
-
-def pointgraph_from_rect(rect):
-    return PointDirectedGraph(np.array(((rect.top(), rect.left()),
-                                        (rect.bottom(), rect.left()),
-                                        (rect.bottom(), rect.right()),
-                                        (rect.top(), rect.right()))),
-                              np.array([[0, 1], [1, 2], [2, 3], [3, 0]]))
+from .conversion import rect_to_pointgraph
 
 
 class _dlib_detect(object):
-
     def __init__(self, model):
         if isinstance(model, STRING_TYPES) or isinstance(model, Path):
             m_path = Path(model)
@@ -28,11 +19,10 @@ class _dlib_detect(object):
 
     def __call__(self, uint8_image, n_upscales=0):
         rects = self._dlib_model(uint8_image, n_upscales)
-        return [pointgraph_from_rect(r) for r in rects]
+        return [rect_to_pointgraph(r) for r in rects]
 
 
 class DlibDetector(object):
-
     def __init__(self, model):
         self._detector = _dlib_detect(model)
 

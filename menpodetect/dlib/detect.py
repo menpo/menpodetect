@@ -3,7 +3,8 @@ from functools import partial
 
 import dlib
 from pathlib import Path
-from menpodetect.detectors import detect
+
+from menpodetect.detect import detect
 from menpodetect.compatibility import STRING_TYPES
 from .conversion import rect_to_pointgraph
 

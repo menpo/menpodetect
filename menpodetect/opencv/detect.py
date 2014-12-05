@@ -3,7 +3,7 @@ import cv2
 from menpo.shape import PointDirectedGraph
 import numpy as np
 from pathlib import Path
-from menpodetect.detectors import detect
+from menpodetect.detect import detect
 from functools import partial
 from menpodetect import models_dir_path
 from menpodetect.compatibility import STRING_TYPES

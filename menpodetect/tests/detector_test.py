@@ -1,5 +1,5 @@
 from menpo.shape import PointDirectedGraph
-from menpodetect.detectors import detect
+from menpodetect.detect import detect
 import menpo.io as mio
 import numpy as np
 from numpy.testing import assert_allclose

@@ -1,8 +1,7 @@
-from menpo.shape import PointDirectedGraph
-import numpy as np
 from pathlib import Path
 
 from menpodetect.paths import models_dir_path
+from menpodetect.conversion import bounding_box
 
 
 # Paths to the OpenCV shipped with menpodetect
@@ -31,8 +30,4 @@ def pointgraph_from_rect(rect):
         A menpo PointDirectedGraph giving the bounding box.
     """
     x, y, w, h = rect
-    return PointDirectedGraph(np.array(((y, x),
-                                        (y + h, x),
-                                        (y + h, x + w),
-                                        (y, x + w))),
-                              np.array([[0, 1], [1, 2], [2, 3], [3, 0]]))
+    return bounding_box((y, x), (y + h, x + w))

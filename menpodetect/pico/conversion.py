@@ -1,5 +1,4 @@
-from menpo.shape import PointDirectedGraph
-import numpy as np
+from menpodetect.conversion import bounding_box
 
 
 def pointgraph_from_circle(fitting):
@@ -26,8 +25,4 @@ def pointgraph_from_circle(fitting):
     y, x = fitting.center
     y -= radius
     x -= radius
-    return PointDirectedGraph(np.array(((y, x),
-                                        (y + diameter, x),
-                                        (y + diameter, x + diameter),
-                                        (y, x + diameter))),
-                              np.array([[0, 1], [1, 2], [2, 3], [3, 0]]))
+    return bounding_box((y, x), (y + diameter, x + diameter))

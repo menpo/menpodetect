@@ -1,6 +1,5 @@
-from menpo.shape import PointDirectedGraph
-import numpy as np
 import dlib
+from menpodetect.conversion import bounding_box
 
 
 def rect_to_pointgraph(rect):
@@ -18,11 +17,8 @@ def rect_to_pointgraph(rect):
     bounding_box : menpo.shape.PointDirectedGraph
         A menpo PointDirectedGraph giving the bounding box.
     """
-    return PointDirectedGraph(np.array(((rect.top(), rect.left()),
-                                        (rect.bottom(), rect.left()),
-                                        (rect.bottom(), rect.right()),
-                                        (rect.top(), rect.right()))),
-                              np.array([[0, 1], [1, 2], [2, 3], [3, 0]]))
+    return bounding_box((rect.top(), rect.left()),
+                        (rect.bottom(), rect.right()))
 
 
 def pointgraph_to_rect(pg):

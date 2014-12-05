@@ -1,13 +1,14 @@
-from menpodetect.detectors import menpo_image_to_uint8
-from .conversion import pointgraph_to_rect
 import dlib
+
+from menpodetect.detect import menpo_image_to_uint8
+from .conversion import pointgraph_to_rect
 
 
 def train_dlib_detector(images, output_path, epsilon=0.01,
                         add_left_right_image_flips=False, be_verbose=True,
                         C=5, detection_window_size=6400, num_threads=None):
     rectangles = [[pointgraph_to_rect(lgroup.lms.bounding_box())
-                  for lgroup in im.landmarks.values()]
+                   for lgroup in im.landmarks.values()]
                   for im in images]
     images = [menpo_image_to_uint8(im) for im in images]
 

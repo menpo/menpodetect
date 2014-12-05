@@ -12,7 +12,7 @@ requirements:
     - numpy 1.9*
     - dlib 18.10
     - opencv 2.4.9*
-    - cypico 0.2.1
+    - cypico 0.2*
     - menpo
 
 test:

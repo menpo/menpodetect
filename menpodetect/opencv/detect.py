@@ -1,34 +1,16 @@
 from __future__ import division
-import cv2
-from menpo.shape import PointDirectedGraph
-import numpy as np
-from pathlib import Path
-from menpodetect.detect import detect
 from functools import partial
-from menpodetect import models_dir_path
+
+import cv2
+from pathlib import Path
+
+from menpodetect.detect import detect
 from menpodetect.compatibility import STRING_TYPES
-
-
-_opencv_models_path = Path(models_dir_path(), 'opencv')
-_opencv_frontal_face_path = Path(_opencv_models_path,
-                                 'haarcascade_frontalface_alt.xml')
-_opencv_profile_face_path = Path(_opencv_models_path,
-                                 'haarcascade_profileface.xml')
-_opencv_eye_path = Path(_opencv_models_path,
-                        'haarcascade_eye.xml')
-
-
-def pointgraph_from_rect(rect):
-    x, y, w, h = rect
-    return PointDirectedGraph(np.array(((y, x),
-                                        (y + h, x),
-                                        (y + h, x + w),
-                                        (y, x + w))),
-                              np.array([[0, 1], [1, 2], [2, 3], [3, 0]]))
+from .conversion import (pointgraph_from_rect, opencv_frontal_face_path,
+                         opencv_profile_face_path, opencv_eye_path)
 
 
 class _opencv_detect(object):
-
     def __init__(self, model):
         if isinstance(model, STRING_TYPES) or isinstance(model, Path):
             m_path = Path(model)
@@ -46,7 +28,6 @@ class _opencv_detect(object):
 
 
 class OpenCVDetector(object):
-
     def __init__(self, model):
         self._detector = _opencv_detect(model)
 
@@ -61,12 +42,12 @@ class OpenCVDetector(object):
 
 
 def load_opencv_frontal_face_detector():
-    return OpenCVDetector(_opencv_frontal_face_path)
+    return OpenCVDetector(opencv_frontal_face_path)
 
 
 def load_opencv_profile_face_detector():
-    return OpenCVDetector(_opencv_profile_face_path)
+    return OpenCVDetector(opencv_profile_face_path)
 
 
 def load_opencv_eye_detector():
-    return OpenCVDetector(_opencv_eye_path)
+    return OpenCVDetector(opencv_eye_path)

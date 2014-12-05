@@ -1,4 +1,5 @@
-from menpodetect.dlib import load_dlib_frontal_face_detector, DlibDetector
+from menpodetect.dlib import (load_dlib_frontal_face_detector, DlibDetector,
+                              train_dlib_detector)
 from menpodetect.opencv import (load_opencv_eye_detector,
                                 load_opencv_frontal_face_detector,
                                 load_opencv_profile_face_detector,

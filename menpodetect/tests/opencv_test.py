@@ -1,0 +1,31 @@
+from menpodetect.opencv import (load_opencv_frontal_face_detector,
+                                load_opencv_eye_detector)
+import menpo.io as mio
+
+takeo = mio.import_builtin_asset.takeo_ppm()
+
+
+def test_frontal_face_detector():
+    takeo_copy = takeo.copy()
+    opencv_detector = load_opencv_frontal_face_detector()
+    pcs = opencv_detector(takeo_copy)
+    assert len(pcs) == 1
+    assert takeo_copy.n_channels == 3
+    assert takeo_copy.landmarks['object_0'][None].n_points == 4
+
+
+def test_frontal_face_detector_min_neighbors():
+    takeo_copy = takeo.copy()
+    opencv_detector = load_opencv_frontal_face_detector()
+    pcs = opencv_detector(takeo_copy, min_neighbours=100)
+    assert len(pcs) == 0
+    assert takeo_copy.n_channels == 3
+
+
+def test_eye_detector():
+    takeo_copy = takeo.copy()
+    opencv_detector = load_opencv_eye_detector()
+    pcs = opencv_detector(takeo_copy, min_size=(5, 5))
+    assert len(pcs) == 1
+    assert takeo_copy.n_channels == 3
+    assert takeo_copy.landmarks['object_0'][None].n_points == 4

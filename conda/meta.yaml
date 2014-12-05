@@ -9,14 +9,25 @@ requirements:
 
   run:
     - python
-    - numpy 1.9.0
+    - numpy 1.9*
     - dlib 18.10
-    - menpo 0.4.0a1
+    - opencv 2.4.9*
+    - cypico 0.2*
+    - menpo
 
 test:
 
+  requires:
+    - nose
+
   imports:
     - menpodetect
+    - menpodetect.dlib
+    - menpodetect.opencv
+    - menpodetect.pico
+
+  commands:
+    - python -c "import nose; nose.main()" -s menpodetect
 
 about:
   home: https://github.com/menpo/menpodetect/

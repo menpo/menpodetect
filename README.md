@@ -5,7 +5,14 @@ to implement novel techniques, but instead wrap existing projects so that they
 integrate nicely with Menpo. At the moment the current libraries are wrapped:
 
   - **[dlib](http://dlib.net/) (Boost Software License - Version 1.0)**  
-    Only the frontal face detection code is currently wrapped.
+    Frontal face detection, arbitrary dlib models and training code is all
+    wrapped.
+  - **[opencv](http://opencv.org/) (BSD)**
+    Frontal face detection, profile face detection, eye detection and arbitrary
+    OpenCV cascade files (via loading from disk) are all provided.
+  - **[pico](https://github.com/nenadmarkus/pico)(Academic Only)**
+    Frontal face detection and arbitrary pico models are provided. Loading
+    arbitrary Pico models is likely to be very difficult, however.
 
 Important
 ---------
@@ -26,3 +33,12 @@ of the conda ecosystem, provided by
 as simple as possible, we suggest that you use conda too! To try and persuade 
 you, go to the [Menpo website](http://www.menpo.io/installation/) to find 
 installation instructions for all major platforms.
+
+If you want to try pip installing this package, note that you will need
+to satisfy the following dependencies BEFORE install:
+
+  - numpy 1.9*
+  - dlib  18.10
+  - opencv 2.4.9*
+  - cypico 0.2.1
+  - menpo 0.4*

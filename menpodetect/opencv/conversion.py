@@ -5,6 +5,7 @@ from pathlib import Path
 from menpodetect.paths import models_dir_path
 
 
+# Paths to the OpenCV shipped with menpodetect
 opencv_models_path = Path(models_dir_path(), 'opencv')
 opencv_frontal_face_path = Path(opencv_models_path,
                                 'haarcascade_frontalface_alt.xml')
@@ -15,6 +16,20 @@ opencv_eye_path = Path(opencv_models_path,
 
 
 def pointgraph_from_rect(rect):
+    r"""
+    Convert an opencv detection to a menpo.shape.PointDirectedGraph.
+    This enforces a particular point ordering.
+
+    Parameters
+    ----------
+    rect : tuple
+        The bounding box to convert. Result of calling an opencv detection.
+
+    Returns
+    -------
+    bounding_box : menpo.shape.PointDirectedGraph
+        A menpo PointDirectedGraph giving the bounding box.
+    """
     x, y, w, h = rect
     return PointDirectedGraph(np.array(((y, x),
                                         (y + h, x),

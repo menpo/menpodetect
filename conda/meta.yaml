@@ -13,7 +13,7 @@ requirements:
     - dlib 18.10
     - opencv 2.4.9*
     - cypico 0.2*
-    - menpo
+    - menpo 0.4.0a3
 
 test:
 

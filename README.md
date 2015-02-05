@@ -38,7 +38,7 @@ If you want to try pip installing this package, note that you will need
 to satisfy the following dependencies BEFORE install:
 
   - numpy 1.9*
-  - dlib  18.10
+  - dlib  18.13
   - opencv 2.4.9*
   - cypico 0.2.1
   - menpo 0.4*

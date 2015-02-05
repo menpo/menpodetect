@@ -9,12 +9,12 @@ def rect_to_pointgraph(rect):
 
     Parameters
     ----------
-    rect : dlib.rect
+    rect : `dlib.rect`
         The bounding box to convert.
 
     Returns
     -------
-    bounding_box : menpo.shape.PointDirectedGraph
+    bounding_box : `menpo.shape.PointDirectedGraph`
         A menpo PointDirectedGraph giving the bounding box.
     """
     return bounding_box((rect.top(), rect.left()),
@@ -23,17 +23,17 @@ def rect_to_pointgraph(rect):
 
 def pointgraph_to_rect(pg):
     r"""
-    Convert a menpo.shape.PointCloud to a dlib.rect.
+    Convert a `menpo.shape.PointCloud` to a `dlib.rect`.
 
     Parameters
     ----------
-    pg : menpo.shape.PointDirectedGraph
+    pg : `menpo.shape.PointDirectedGraph`
         The Menpo PointDirectedGraph to convert into a rect. No check is done
         to see if the PointDirectedGraph actually is a rectangle.
 
     Returns
     -------
-    bounding_rect : dlib.rect
+    bounding_rect : `dlib.rect`
         A dlib Rectangle.
     """
     min_p, max_p = pg.bounds()

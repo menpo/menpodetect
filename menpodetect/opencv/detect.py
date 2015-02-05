@@ -20,8 +20,8 @@ class _opencv_detect(object):
 
     Parameters
     ----------
-    model : Path or str or opencv.CascadeClassifier
-        Either a path to an opencv.CascadeClassifier or the detector itself.
+    model : `Path` or `str` or `opencv.CascadeClassifier`
+        Either a path to an `opencv.CascadeClassifier` or the detector itself.
 
     Raises
     ------
@@ -43,18 +43,18 @@ class _opencv_detect(object):
 
         Parameters
         ----------
-        uint8_image : ndarray
+        uint8_image : `ndarray`
             A Greyscale (1 Channel) numpy array of uint8
-        scale_factor : float, optional
+        scale_factor : `float`, optional
             The amount to increase the sliding windows by over the second
             pass.
-        min_neighbours : int, optional
+        min_neighbours : `int`, optional
             The minimum number of neighbours (close detections) before
             Non-Maximum suppression to be considered a detection. Use 0
             to return all detections.
-        min_size : tuple of 2 ints
+        min_size : `tuple` of 2 ints
             The minimum object size in pixels that the detector will consider.
-        flags : int
+        flags : `int`
             The flags to be passed through to the detector.
 
         Returns
@@ -88,32 +88,32 @@ class OpenCVDetector(object):
 
         Parameters
         ----------
-        image : menpo.image.Image
+        image : `menpo.image.Image`
             A Menpo image to detect. The bounding boxes of the detected objects
             will be attached to this image.
-        image_diagonal : int, optional
+        image_diagonal : `int`, optional
             The total size of the diagonal of the image that should be used for
             detection. This is useful for scaling images up and down for
             detection.
-        group_prefix : str, optional
+        group_prefix : `str`, optional
             The prefix string to be appended to each each landmark group that is
             stored on the image. Each detection will be stored as group_prefix_#
             where # is a count starting from 0.
-        scale_factor : float, optional
+        scale_factor : `float`, optional
             The amount to increase the sliding windows by over the second
             pass.
-        min_neighbours : int, optional
+        min_neighbours : `int`, optional
             The minimum number of neighbours (close detections) before
             Non-Maximum suppression to be considered a detection. Use 0
             to return all detections.
-        min_size : tuple of 2 ints
+        min_size : `tuple` of 2 ints
             The minimum object size in pixels that the detector will consider.
-        flags : int
+        flags : `int`, optional
             The flags to be passed through to the detector.
 
         Returns
         ------
-        bounding_boxes : menpo.shape.PointDirectedGraph
+        bounding_boxes : `menpo.shape.PointDirectedGraph`
             The detected objects.
         """
         detect_partial = partial(self._detector, scale_factor=scale_factor,

@@ -19,7 +19,7 @@ class _pico_detect(object):
 
     Parameters
     ----------
-    model : pico detector
+    model : `pico detector`
         At the moment loading new pico detectors is not possible. Unless you
         have managed to load a pico detector as a 1D uint8 array.
 
@@ -42,11 +42,11 @@ class _pico_detect(object):
 
         Parameters
         ----------
-        uint8_image : ndarray
+        uint8_image : `ndarray`
             A Greyscale (1 Channel) numpy array of uint8
         max_detections : `int`, optional
             The maximum number of detections to return.
-        orientations : list of `float`s or `float`, optional
+        orientations : `list` of `float`s or `float`, optional
             The orientations of the cascades to use. ``0.0`` will perform an
             axis aligned detection. Values greater than ``0.0`` will perform
             detections of the cascade rotated counterclockwise around a unit
@@ -68,7 +68,7 @@ class _pico_detect(object):
 
         Returns
         ------
-        bounding_boxes : menpo.shape.PointDirectedGraph
+        bounding_boxes : `menpo.shape.PointDirectedGraph`
             The detected objects.
         """
         fittings = detect_objects(
@@ -90,14 +90,14 @@ class _pico_face_detect(_pico_detect):
 
         Parameters
         ----------
-        image : menpo.image.Image
+        image : `menpo.image.Image`
             A Menpo image to detect. The bounding boxes of the detected faces
             will be attached to this image.
-        image_diagonal : int, optional
+        image_diagonal : `int`, optional
             The total size of the diagonal of the image that should be used for
             detection. This is useful for scaling images up and down for
             detection.
-        group_prefix : str, optional
+        group_prefix : `str`, optional
             The prefix string to be appended to each each landmark group that is
             stored on the image. Each detection will be stored as group_prefix_#
             where # is a count starting from 0.
@@ -125,7 +125,7 @@ class _pico_face_detect(_pico_detect):
 
         Returns
         ------
-        bounding_boxes : menpo.shape.PointDirectedGraph
+        bounding_boxes : `menpo.shape.PointDirectedGraph`
             The detected faces.
         """
         fittings = detect_frontal_faces(
@@ -165,14 +165,14 @@ class PicoDetector(object):
 
         Parameters
         ----------
-        image : menpo.image.Image
+        image : `menpo.image.Image`
             A Menpo image to detect. The bounding boxes of the detected objects
             will be attached to this image.
-        image_diagonal : int, optional
+        image_diagonal : `int`, optional
             The total size of the diagonal of the image that should be used for
             detection. This is useful for scaling images up and down for
             detection.
-        group_prefix : str, optional
+        group_prefix : `str`, optional
             The prefix string to be appended to each each landmark group that is
             stored on the image. Each detection will be stored as group_prefix_#
             where # is a count starting from 0.
@@ -218,7 +218,7 @@ def load_pico_frontal_face_detector():
 
     Returns
     -------
-    detector : PicoDetector
+    detector : `PicoDetector`
         The frontal face detector.
     """
     return PicoDetector(None, detector=_pico_face_detect)

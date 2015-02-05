@@ -8,7 +8,7 @@ def src_dir_path():
 
     Returns
     -------
-    path : str
+    path : `str`
         The full path to the top of the MenpoDetect package
     """
     return os.path.split(os.path.abspath(__file__))[0]
@@ -19,7 +19,7 @@ def models_dir_path():
 
     Returns
     -------
-    path : str
+    path : `str`
         The full path to the models directory of the MenpoDetect package
     """
     return os.path.join(src_dir_path(), 'models')

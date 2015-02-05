@@ -21,12 +21,12 @@ def pointgraph_from_rect(rect):
 
     Parameters
     ----------
-    rect : tuple
+    rect : `tuple`
         The bounding box to convert. Result of calling an opencv detection.
 
     Returns
     -------
-    bounding_box : menpo.shape.PointDirectedGraph
+    bounding_box : `menpo.shape.PointDirectedGraph`
         A menpo PointDirectedGraph giving the bounding box.
     """
     x, y, w, h = rect

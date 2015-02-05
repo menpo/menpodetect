@@ -11,12 +11,12 @@ def _greyscale(image):
 
     Parameters
     ----------
-    image : menpo.image.Image
+    image : `menpo.image.Image`
         The image to convert.
 
     Returns
     -------
-    image : menpo.image.Image
+    image : `menpo.image.Image`
         A greyscale version of the image.
     """
     if image.n_channels > 1:
@@ -36,13 +36,13 @@ def menpo_image_to_uint8(image):
 
     Parameters
     ----------
-    image : menpo.image.Image
+    image : `menpo.image.Image`
         The image to convert.
 
     Returns
     -------
-    uint8_image : ndarray
-        uint8 Numpy array.
+    uint8_image : `ndarray`
+        `uint8` Numpy array.
     """
     return np.array(image.as_PILImage())
 
@@ -58,25 +58,25 @@ def detect(detector_callable, image, greyscale=True,
 
     Parameters
     ----------
-    detector_callable : callable or function
+    detector_callable : `callable` or `function`
         A callable object that will perform detection given a single parameter,
-        a uint8 numpy array.
-    image : menpo.image.Image
+        a `uint8` numpy array.
+    image : `menpo.image.Image`
         A Menpo image to detect. The bounding boxes of the detected objects
         will be attached to this image.
-    greyscale : bool, optional
+    greyscale : `bool`, optional
         Convert the image to greyscale or not.
-    image_diagonal : int, optional
+    image_diagonal : `int`, optional
         The total size of the diagonal of the image that should be used for
         detection. This is useful for scaling images up and down for detection.
-    group_prefix : str, optional
+    group_prefix : `str`, optional
         The prefix string to be appended to each each landmark group that is
         stored on the image. Each detection will be stored as group_prefix_#
         where # is a count starting from 0.
 
     Returns
     -------
-    bounding_boxes : menpo.shape.PointDirectedGraph
+    bounding_boxes : `menpo.shape.PointDirectedGraph`
         A list of bounding boxes representing the detections found.
     """
     d_image = image

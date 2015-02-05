@@ -11,13 +11,13 @@ def pointgraph_from_circle(fitting):
 
     Parameters
     ----------
-    fitting : cypico.PicoDetection
+    fitting : `cypico.PicoDetection`
         The Pico detection to convert. Result of calling a pico detection.
         A namedtuple with a diameter and a centre.
 
     Returns
     -------
-    bounding_box : menpo.shape.PointDirectedGraph
+    bounding_box : `menpo.shape.PointDirectedGraph`
         A menpo PointDirectedGraph giving the bounding box.
     """
     diameter = fitting.diameter

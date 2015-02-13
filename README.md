@@ -13,6 +13,10 @@ integrate nicely with Menpo. At the moment the current libraries are wrapped:
   - **[pico](https://github.com/nenadmarkus/pico)(Academic Only)**
     Frontal face detection and arbitrary pico models are provided. Loading
     arbitrary Pico models is likely to be very difficult, however.
+  - **[ffld2](http://charles.dubout.ch/en/index.html)(GNU AGPL)**
+    Frontal face detection using the DPM Baseline model provided by
+    [Mathias et. al.](http://markusmathias.bitbucket.org/2014_eccv_face_detection/).
+    Training code is also wrapped, but requires explicit negative samples.
 
 Important
 ---------
@@ -37,8 +41,9 @@ installation instructions for all major platforms.
 If you want to try pip installing this package, note that you will need
 to satisfy the following dependencies BEFORE install:
 
-  - numpy 1.9*
+  - numpy >1.9.1
   - dlib  18.13
   - opencv 2.4.9*
   - cypico 0.2.1
+  - cyffld2 0.1.0
   - menpo 0.4*

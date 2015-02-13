@@ -11,7 +11,7 @@ def test_frontal_face_detector():
     pcs = opencv_detector(takeo_copy)
     assert len(pcs) == 1
     assert takeo_copy.n_channels == 3
-    assert takeo_copy.landmarks['object_0'][None].n_points == 4
+    assert takeo_copy.landmarks['opencv_0'][None].n_points == 4
 
 
 def test_frontal_face_detector_min_neighbors():
@@ -28,4 +28,4 @@ def test_eye_detector():
     pcs = opencv_detector(takeo_copy, min_size=(5, 5))
     assert len(pcs) == 1
     assert takeo_copy.n_channels == 3
-    assert takeo_copy.landmarks['object_0'][None].n_points == 4
+    assert takeo_copy.landmarks['opencv_0'][None].n_points == 4

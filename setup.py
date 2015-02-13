@@ -14,6 +14,7 @@ versioneer.parentdir_prefix = project_name + '-'  # dirname like 'menpo-v1.2.0'
 
 # Also requires the dlib==18.13 package
 requirements = ['cypico==0.2.2',
+                'cyffld2==0.1.0',
                 'menpo>=0.4.0,<0.5']
 
 

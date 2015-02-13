@@ -73,9 +73,9 @@ def train_ffld2_detector(positive_images, negative_images, n_components=3,
     for image in negative_images:
         negative_image_arrays.append(menpo_image_to_uint8(image))
 
-    train_model(positive_image_arrays, positive_bbox_arrays,
-                negative_image_arrays, n_components=n_components,
-                pad_x=pad_x, pad_y=pad_y, interval=interval,
-                n_relabel=n_relabel, n_datamine=n_datamine,
-                max_negatives=max_negatives, C=C, J=J, overlap=overlap,
-                model_out_path=model_out_path)
+    return train_model(positive_image_arrays, positive_bbox_arrays,
+                       negative_image_arrays, n_components=n_components,
+                       pad_x=pad_x, pad_y=pad_y, interval=interval,
+                       n_relabel=n_relabel, n_datamine=n_datamine,
+                       max_negatives=max_negatives, C=C, J=J, overlap=overlap,
+                       model_out_path=model_out_path)

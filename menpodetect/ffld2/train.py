@@ -1,7 +1,9 @@
 from cyffld2 import train_model
 import numpy as np
 
+from .conversion import ensure_channel_axis
 from ..detect import menpo_image_to_uint8
+
 
 def train_ffld2_detector(positive_images, negative_images, n_components=3,
                          pad_x=6, pad_y=6, interval=5, n_relabel=8,
@@ -60,7 +62,9 @@ def train_ffld2_detector(positive_images, negative_images, n_components=3,
     positive_bbox_arrays = []
 
     for image in positive_images:
-        positive_image_arrays.append(menpo_image_to_uint8(image))
+        image_pixels = menpo_image_to_uint8(image)
+        image_pixels = ensure_channel_axis(image_pixels)
+        positive_image_arrays.append(image_pixels)
         im_bounding_boxes = []
         for lmark in image.landmarks.values():
             bb = lmark.lms.bounding_box()
@@ -71,7 +75,9 @@ def train_ffld2_detector(positive_images, negative_images, n_components=3,
         positive_bbox_arrays.append(im_bounding_boxes)
 
     for image in negative_images:
-        negative_image_arrays.append(menpo_image_to_uint8(image))
+        image_pixels = menpo_image_to_uint8(image)
+        image_pixels = ensure_channel_axis(image_pixels)
+        negative_image_arrays.append(image_pixels)
 
     return train_model(positive_image_arrays, positive_bbox_arrays,
                        negative_image_arrays, n_components=n_components,

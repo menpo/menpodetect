@@ -18,3 +18,11 @@ def pointgraph_from_rect(rect):
     """
     return bounding_box((rect.y, rect.x),
                         (rect.y + rect.height, rect.x + rect.width))
+
+
+def ensure_channel_axis(image_pixels):
+    # In the case of greyscale images, we need to manually add the channel
+    # back on for the Cython code.
+    if image_pixels.ndim == 2:
+        image_pixels = image_pixels[..., None]
+    return image_pixels

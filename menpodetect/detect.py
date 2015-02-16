@@ -44,6 +44,9 @@ def menpo_image_to_uint8(image):
     uint8_image : `ndarray`
         `uint8` Numpy array.
     """
+    # Don't convert images that are already uint8
+    if image.pixels.dtype == np.uint8:
+        return image.pixels.copy()
     return np.array(image.as_PILImage())
 
 

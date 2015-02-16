@@ -6,7 +6,7 @@ from pathlib import Path
 
 from menpodetect.detect import detect
 from menpodetect.compatibility import STRING_TYPES
-from .conversion import pointgraph_from_rect
+from .conversion import pointgraph_from_rect, ensure_channel_axis
 
 
 class _ffld2_detect(object):
@@ -63,8 +63,7 @@ class _ffld2_detect(object):
             The detected objects.
         """
         # Add the channel to a greyscale image.
-        if uint8_image.ndim == 2:
-            uint8_image = uint8_image[..., None]
+        uint8_image = ensure_channel_axis(uint8_image)
         rects = detect_objects(self._ffld2_model, uint8_image,
                                padding=padding, interval=interval,
                                threshold=threshold, overlap=overlap)

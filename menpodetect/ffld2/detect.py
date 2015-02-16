@@ -85,7 +85,7 @@ class FFLD2Detector(object):
                  group_prefix='ffld2', padding=6, interval=5, threshold=0.5,
                  overlap=0.3):
         r"""
-        Perform a detection using the cached opencv detector.
+        Perform a detection using the cached ffdl2 detector.
 
         The detections will also be attached to the image as landmarks.
 

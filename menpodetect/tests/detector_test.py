@@ -3,9 +3,11 @@ from menpodetect.detect import detect
 import menpo.io as mio
 import numpy as np
 from numpy.testing import assert_allclose
+from nose.tools import raises
 
 
 takeo = mio.import_builtin_asset.takeo_ppm()
+takeo_uint8 = mio.import_image(mio.data_path_to('takeo.ppm'), normalise=False)
 fake_box = np.array([[0, 0], [1, 0], [1, 1], [0, 1]])
 fake_detector = lambda x: ([PointDirectedGraph(
     fake_box.copy(),
@@ -21,3 +23,17 @@ def test_rescaling_image():
     assert takeo_copy.landmarks['object_0'][None].n_points == 4
     assert_allclose(takeo_copy.landmarks['object_0'][None].points,
                     fake_box * (1.0 / ratio), atol=10e-2)
+
+
+def test_passing_uint8_image():
+    takeo_copy = takeo_uint8.copy()
+    pcs = detect(fake_detector, takeo_copy, greyscale=False)
+    assert len(pcs) == 1
+    assert takeo_copy.n_channels == 3
+    assert takeo_copy.landmarks['object_0'][None].n_points == 4
+
+
+@raises(ValueError)
+def test_passing_uint8_image_greyscale_raises():
+    takeo_copy = takeo_uint8.copy()
+    pcs = detect(fake_detector, takeo_copy, greyscale=True)

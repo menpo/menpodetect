@@ -18,8 +18,15 @@ def _greyscale(image):
     -------
     image : `menpo.image.Image`
         A greyscale version of the image.
+
+    Raises
+    ------
+    ValueError
+        uint8 images cannot be converted to Greyscale
     """
     if image.n_channels > 1:
+        if image.pixels.dtype == np.uint8:
+            raise ValueError('uint8 images cannot be converted to greyscale')
         if image.n_channels == 3:
             # Use luminosity for RGB images
             image = image.as_greyscale(mode='luminosity')
@@ -37,17 +44,18 @@ def menpo_image_to_uint8(image):
     Parameters
     ----------
     image : `menpo.image.Image`
-        The image to convert.
+        The image to convert. If already uint8, only the channels will be
+        rolled to the last axis.
 
     Returns
     -------
     uint8_image : `ndarray`
-        `uint8` Numpy array.
+        `uint8` Numpy array, channels as the back (last) axis.
     """
-    # Don't convert images that are already uint8
     if image.pixels.dtype == np.uint8:
-        return image.pixels.copy()
-    return np.array(image.as_PILImage())
+        return image.rolled_channels()
+    else:
+        return np.array(image.as_PILImage())
 
 
 def detect(detector_callable, image, greyscale=True,
@@ -59,11 +67,15 @@ def detect(detector_callable, image, greyscale=True,
     the image to a given diagonal, performing the detection, and attaching
     the scaled landmarks back onto the original image.
 
+    uint8 images cannot be converted to greyscale by this framework, so must
+    already be greyscale or ``greyscale=False``.
+
     Parameters
     ----------
     detector_callable : `callable` or `function`
         A callable object that will perform detection given a single parameter,
-        a `uint8` numpy array.
+        a `uint8` numpy array with either no channels, or channels as the
+        *last* axis.
     image : `menpo.image.Image`
         A Menpo image to detect. The bounding boxes of the detected objects
         will be attached to this image.

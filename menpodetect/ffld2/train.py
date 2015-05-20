@@ -8,7 +8,7 @@ from ..detect import menpo_image_to_uint8
 def train_ffld2_detector(positive_images, negative_images, n_components=3,
                          pad_x=6, pad_y=6, interval=5, n_relabel=8,
                          n_datamine=10, max_negatives=24000, C=0.002, J=2.0,
-                         overlap=0.5, model_out_path=None):
+                         overlap=0.5):
     r"""
     Train a DPM using the FFLD2 framework. This is a fairly slow process to
     expect to wait for a while. FFLD2 prints out information at each iteration
@@ -49,8 +49,6 @@ def train_ffld2_detector(positive_images, negative_images, n_components=3,
         SVM positive regularization constant boost.
     overlap : `double`
         Minimum overlap in in latent positive search and non-maxima suppression.
-    model_out_path : `str`, optional
-        If provided, the model will be saved out to the given path.
 
     Returns
     -------
@@ -83,5 +81,4 @@ def train_ffld2_detector(positive_images, negative_images, n_components=3,
                        negative_image_arrays, n_components=n_components,
                        pad_x=pad_x, pad_y=pad_y, interval=interval,
                        n_relabel=n_relabel, n_datamine=n_datamine,
-                       max_negatives=max_negatives, C=C, J=J, overlap=overlap,
-                       model_out_path=model_out_path)
+                       max_negatives=max_negatives, C=C, J=J, overlap=overlap)

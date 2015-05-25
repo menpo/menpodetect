@@ -25,9 +25,6 @@ test:
     - menpodetect.opencv
     - menpodetect.pico
 
-  commands:
-    - python -c "import nose; nose.main()" -s menpodetect
-
 about:
   home: https://github.com/menpo/menpodetect/
   license: BSD License

@@ -53,9 +53,13 @@ def menpo_image_to_uint8(image):
         `uint8` Numpy array, channels as the back (last) axis.
     """
     if image.pixels.dtype == np.uint8:
-        return image.rolled_channels()
+        uint8_im = image.rolled_channels()
     else:
-        return np.array(image.as_PILImage())
+        uint8_im = np.array(image.as_PILImage())
+    # Handle the dead axis on greyscale images
+    if image.n_channels == 1:
+        uint8_im = uint8_im[..., 0]
+    return uint8_im
 
 
 def detect(detector_callable, image, greyscale=True,

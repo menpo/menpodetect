@@ -13,7 +13,7 @@ requirements:
     - opencv 2.4.9*
     - cypico 0.2*
     - cyffld2 0.1.*
-    - menpo 0.4.0|>=0.4.1,<0.5.0  # Make sure we ignore the alpha
+    - menpo # 0.5.0 on release
 
 test:
 
@@ -26,9 +26,6 @@ test:
     - menpodetect.opencv
     - menpodetect.pico
     - menpodetect.ffld2
-
-  commands:
-    - python -c "import nose; nose.main()" -s menpodetect
 
 about:
   home: https://github.com/menpo/menpodetect/

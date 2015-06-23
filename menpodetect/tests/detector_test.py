@@ -9,7 +9,7 @@ from nose.tools import raises
 takeo = mio.import_builtin_asset.takeo_ppm()
 takeo_uint8 = mio.import_image(mio.data_path_to('takeo.ppm'), normalise=False)
 fake_box = np.array([[0, 0], [1, 0], [1, 1], [0, 1]])
-fake_detector = lambda x: ([PointDirectedGraph(
+fake_detector = lambda x: ([PointDirectedGraph.init_from_edges(
     fake_box.copy(),
     np.array([[0, 1], [1, 2], [2, 3], [3, 0]]))])
 

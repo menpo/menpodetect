@@ -9,10 +9,10 @@ requirements:
 
   run:
     - python
-    - dlib 18.13
-    - opencv 2.4.9*
+    - dlib 18.*
+    - opencv 2.4.*
     - cypico 0.2*
-    - menpo # 0.5.0 on release
+    - menpo 0.5.*
 
 test:
 

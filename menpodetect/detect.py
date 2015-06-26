@@ -104,7 +104,7 @@ def detect(detector_callable, image, greyscale=True,
         d_image = _greyscale(d_image)
 
     if image_diagonal is not None:
-        scale_factor = image_diagonal / image.diagonal
+        scale_factor = image_diagonal / image.diagonal()
         d_image = d_image.rescale(scale_factor)
 
     pcs = detector_callable(menpo_image_to_uint8(d_image))

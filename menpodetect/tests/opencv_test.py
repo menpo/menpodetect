@@ -1,3 +1,4 @@
+from numpy.testing import assert_allclose
 from menpodetect.opencv import (load_opencv_frontal_face_detector,
                                 load_opencv_eye_detector)
 import menpo.io as mio
@@ -26,6 +27,6 @@ def test_eye_detector():
     takeo_copy = takeo.copy()
     opencv_detector = load_opencv_eye_detector()
     pcs = opencv_detector(takeo_copy, min_size=(5, 5))
-    assert len(pcs) == 1
+    assert_allclose(len(pcs),  1)
     assert takeo_copy.n_channels == 3
     assert takeo_copy.landmarks['opencv_0'][None].n_points == 4

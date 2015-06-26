@@ -57,7 +57,7 @@ def menpo_image_to_uint8(image):
     else:
         uint8_im = np.array(image.as_PILImage())
     # Handle the dead axis on greyscale images
-    if image.n_channels == 1:
+    if uint8_im.ndim == 3 and uint8_im.shape[-1] == 1:
         uint8_im = uint8_im[..., 0]
     return uint8_im
 

@@ -29,4 +29,7 @@ def test_eye_detector():
     pcs = opencv_detector(takeo_copy, min_size=(5, 5), min_neighbours=0)
     assert len(pcs) > 0
     assert takeo_copy.n_channels == 3
-    assert takeo_copy.landmarks['opencv_0'][None].n_points == 4
+    # This is because appyveyor and travis (automated testing) return
+    # a different number of detections
+    first_l = list(takeo_copy.landmarks.items_matching('opencv_*'))[0][1]
+    assert first_l.lms.n_points == 4

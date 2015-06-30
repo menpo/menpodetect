@@ -5,10 +5,6 @@ env:
     - PYTHON_VERSION: 2.7
     - PYTHON_VERSION: 3.4
 
-matrix:
-  allow_failures:
-    - env: PYTHON_VERSION=3.4  # waiting for menpo Python 3 support
-
 install:
 - wget https://raw.githubusercontent.com/menpo/condaci/v0.2.4/condaci.py -O condaci.py
 - python condaci.py setup $PYTHON_VERSION --channel $BINSTAR_USER

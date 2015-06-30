@@ -16,7 +16,7 @@ fake_detector = lambda x: ([PointDirectedGraph.init_from_edges(
 
 def test_rescaling_image():
     takeo_copy = takeo.copy()
-    ratio = 200.0 / takeo_copy.diagonal
+    ratio = 200.0 / takeo_copy.diagonal()
     pcs = detect(fake_detector, takeo_copy, image_diagonal=200)
     assert len(pcs) == 1
     assert takeo_copy.n_channels == 3

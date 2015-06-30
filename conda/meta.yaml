@@ -12,6 +12,7 @@ requirements:
     - dlib 18.*
     - opencv 2.4.*
     - cypico 0.2*
+    - cyffld2 0.1.*
     - menpo 0.5.*
 
 test:
@@ -24,6 +25,7 @@ test:
     - menpodetect.dlib
     - menpodetect.opencv
     - menpodetect.pico
+    - menpodetect.ffld2
 
 about:
   home: https://github.com/menpo/menpodetect/

@@ -53,9 +53,13 @@ def menpo_image_to_uint8(image):
         `uint8` Numpy array, channels as the back (last) axis.
     """
     if image.pixels.dtype == np.uint8:
-        return image.rolled_channels()
+        uint8_im = image.rolled_channels()
     else:
-        return np.array(image.as_PILImage())
+        uint8_im = np.array(image.as_PILImage())
+    # Handle the dead axis on greyscale images
+    if uint8_im.ndim == 3 and uint8_im.shape[-1] == 1:
+        uint8_im = uint8_im[..., 0]
+    return uint8_im
 
 
 def detect(detector_callable, image, greyscale=True,
@@ -100,7 +104,7 @@ def detect(detector_callable, image, greyscale=True,
         d_image = _greyscale(d_image)
 
     if image_diagonal is not None:
-        scale_factor = image_diagonal / image.diagonal
+        scale_factor = image_diagonal / image.diagonal()
         d_image = d_image.rescale(scale_factor)
 
     pcs = detector_callable(menpo_image_to_uint8(d_image))

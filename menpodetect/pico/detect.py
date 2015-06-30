@@ -155,7 +155,7 @@ class PicoDetector(object):
     def __init__(self, model, detector=_pico_detect):
         self._detector = detector(model)
 
-    def __call__(self, image, image_diagonal=None, group_prefix='object',
+    def __call__(self, image, image_diagonal=None, group_prefix='pico',
                  max_detections=100, orientations=0.0, scale_factor=1.2,
                  stride_factor=0.1, min_size=100, confidence_cutoff=3.0):
         r"""

@@ -76,7 +76,7 @@ class DlibDetector(object):
         self._detector = _dlib_detect(model)
 
     def __call__(self, image, greyscale=True, image_diagonal=None,
-                 group_prefix='object', n_upscales=0):
+                 group_prefix='dlib', n_upscales=0):
         r"""
         Perform a detection using the cached dlib detector.
 

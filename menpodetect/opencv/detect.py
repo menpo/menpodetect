@@ -78,7 +78,7 @@ class OpenCVDetector(object):
     def __init__(self, model):
         self._detector = _opencv_detect(model)
 
-    def __call__(self, image, image_diagonal=None, group_prefix='object',
+    def __call__(self, image, image_diagonal=None, group_prefix='opencv',
                  scale_factor=1.1, min_neighbours=5,
                  min_size=(30, 30), flags=cv2.cv.CV_HAAR_SCALE_IMAGE):
         r"""

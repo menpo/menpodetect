@@ -55,3 +55,7 @@ target/
 
 # IntelliJ
 *.iml
+
+# cyffld2 files
+tmp.txt
+wisdom.fftw

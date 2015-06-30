@@ -1,4 +1,10 @@
-from numpy.testing import assert_allclose
+import sys
+
+if sys.version_info.major == 3:
+    from nose.plugins.skip import SkipTest
+    raise SkipTest('OpenCV is incompatible with Python 3 - '
+                   'skipping OpenCV tests')
+
 from menpodetect.opencv import (load_opencv_frontal_face_detector,
                                 load_opencv_eye_detector)
 import menpo.io as mio

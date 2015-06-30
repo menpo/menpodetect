@@ -10,7 +10,7 @@ requirements:
   run:
     - python
     - dlib 18.*
-    - opencv 2.4.*
+    - opencv 2.4.*  # [not py3k]
     - cypico 0.2*
     - cyffld2 0.1.*
     - menpo 0.5.*
@@ -19,11 +19,12 @@ test:
 
   requires:
     - nose
+    - nose-exclude
 
   imports:
     - menpodetect
     - menpodetect.dlib
-    - menpodetect.opencv
+    - menpodetect.opencv  # [not py3k]
     - menpodetect.pico
     - menpodetect.ffld2
 

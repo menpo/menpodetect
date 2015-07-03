@@ -10,10 +10,10 @@ integrate nicely with Menpo. At the moment the current libraries are wrapped:
   - **[opencv](http://opencv.org/) (BSD)**
     Frontal face detection, profile face detection, eye detection and arbitrary
     OpenCV cascade files (via loading from disk) are all provided.
-  - **[pico](https://github.com/nenadmarkus/pico)(Academic Only)**
+  - **[pico](https://github.com/nenadmarkus/pico) (Academic Only)**
     Frontal face detection and arbitrary pico models are provided. Loading
     arbitrary Pico models is likely to be very difficult, however.
-  - **[ffld2](http://charles.dubout.ch/en/index.html)(GNU AGPL)**
+  - **[ffld2](http://charles.dubout.ch/en/index.html) (GNU AGPL)**
     Frontal face detection using the DPM Baseline model provided by
     [Mathias et. al.](http://markusmathias.bitbucket.org/2014_eccv_face_detection/).
     Training code is also wrapped, but requires explicit negative samples.

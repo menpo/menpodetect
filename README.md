@@ -44,6 +44,6 @@ to satisfy the following dependencies BEFORE install:
   - numpy >1.9.1
   - dlib  18.13
   - opencv 2.4.9*
-  - cypico 0.2.1
-  - cyffld2 0.1.0
-  - menpo 0.4*
+  - cypico 0.2.*
+  - cyffld2 0.1.*
+  - menpo 0.5.*

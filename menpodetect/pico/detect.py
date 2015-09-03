@@ -1,6 +1,8 @@
 from __future__ import division
 from functools import partial
 
+import numpy as np
+
 from cypico import detect_objects, detect_frontal_faces
 from pathlib import Path
 
@@ -35,8 +37,8 @@ class _pico_detect(object):
         self._pico_model = model
 
     def __call__(self, uint8_image, max_detections=100, orientations=0.0,
-                 scale_factor=1.2, stride_factor=0.1,
-                 min_size=100, confidence_cutoff=3.0):
+                 degrees=True, scale_factor=1.2, stride_factor=0.1,
+                 min_size=100, confidence_cutoff=3.0, axis_aligned_bb=True):
         r"""
         Perform a detection using the cached pico detector.
 
@@ -65,6 +67,11 @@ class _pico_detect(object):
         confidence_cutoff : `float`, optional
             The confidence value to trim the detections with. Any detections
             with confidence less than the cutoff will be discarded.
+        axis_aligned_bb : `bool`, optional
+            If ``True``, the returned detections will be axis aligned,
+            regardless of which orientation they were detected at.
+            If ``False``, the returned bounding box will be rotated by the
+            orientation detected.
 
         Returns
         ------
@@ -75,14 +82,15 @@ class _pico_detect(object):
             uint8_image, self._pico_model, max_detections=max_detections,
             orientations=orientations, scale_factor=scale_factor,
             stride_factor=stride_factor, min_size=min_size,
-            confidence_cutoff=confidence_cutoff)
+            confidence_cutoff=confidence_cutoff,
+            axis_aligned_bb=axis_aligned_bb)
         return [pointgraph_from_circle(f) for f in fittings]
 
 
 class _pico_face_detect(_pico_detect):
     def __call__(self, uint8_image, max_detections=100, orientations=0.0,
                  scale_factor=1.2, stride_factor=0.1,
-                 min_size=100, confidence_cutoff=3.0):
+                 min_size=100, confidence_cutoff=3.0, axis_aligned_bb=True):
         r"""
         Perform a detection using the frontal face pico detector.
 
@@ -122,6 +130,11 @@ class _pico_face_detect(_pico_detect):
         confidence_cutoff : `float`, optional
             The confidence value to trim the detections with. Any detections
             with confidence less than the cutoff will be discarded.
+        axis_aligned_bb : `bool`, optional
+            If ``True``, the returned detections will be axis aligned,
+            regardless of which orientation they were detected at.
+            If ``False``, the returned bounding box will be rotated by the
+            orientation detected.
 
         Returns
         ------
@@ -133,7 +146,8 @@ class _pico_face_detect(_pico_detect):
             orientations=orientations, scale_factor=scale_factor,
             stride_factor=stride_factor, min_size=min_size,
             confidence_cutoff=confidence_cutoff)
-        return [pointgraph_from_circle(f) for f in fittings]
+        return [pointgraph_from_circle(f, axis_aligned_bb=axis_aligned_bb)
+                for f in fittings]
 
 
 # This is a slightly strange model because at the moment cypico is not
@@ -156,8 +170,9 @@ class PicoDetector(object):
         self._detector = detector(model)
 
     def __call__(self, image, image_diagonal=None, group_prefix='pico',
-                 max_detections=100, orientations=0.0, scale_factor=1.2,
-                 stride_factor=0.1, min_size=100, confidence_cutoff=3.0):
+                 max_detections=100, orientations=0.0, degrees=True,
+                 scale_factor=1.2, stride_factor=0.1, min_size=100,
+                 confidence_cutoff=3.0, axis_aligned_bb=True):
         r"""
         Perform a detection using the cached pico detector.
 
@@ -184,7 +199,11 @@ class PicoDetector(object):
             detections of the cascade rotated counterclockwise around a unit
             circle.
             If a list is passed, each item should be an orientation in
-            radians around the unit circle, with ``0.0`` being axis aligned.
+            either radians or degrees around the unit circle, with ``0.0``
+            being axis aligned.
+        degrees : `bool`, optional
+            If ``True``, the ``orientations`` parameter is treated as
+            rotations counterclockwise in degrees rather than radians.
         scale_factor : `float`, optional
             The ratio to increase the cascade window at every iteration. Must
             be greater than 1.0
@@ -197,17 +216,26 @@ class PicoDetector(object):
         confidence_cutoff : `float`, optional
             The confidence value to trim the detections with. Any detections
             with confidence less than the cutoff will be discarded.
+        axis_aligned_bb : `bool`, optional
+            If ``True``, the returned detections will be axis aligned,
+            regardless of which orientation they were detected at.
+            If ``False``, the returned bounding box will be rotated by the
+            orientation detected.
 
         Returns
         ------
         bounding_boxes : menpo.shape.PointDirectedGraph
             The detected objects.
         """
+        if degrees:
+            # Cypico expects Radians
+            orientations = np.deg2rad(orientations)
         detect_partial = partial(self._detector, max_detections=max_detections,
                                  orientations=orientations,
                                  scale_factor=scale_factor,
                                  stride_factor=stride_factor, min_size=min_size,
-                                 confidence_cutoff=confidence_cutoff)
+                                 confidence_cutoff=confidence_cutoff,
+                                 axis_aligned_bb=axis_aligned_bb)
         return detect(detect_partial, image, greyscale=True,
                       image_diagonal=image_diagonal, group_prefix=group_prefix)
 

@@ -1,12 +1,13 @@
 from menpodetect.conversion import bounding_box
+from menpo.transform import rotate_ccw_about_centre
 
 
-def pointgraph_from_circle(fitting):
+def pointgraph_from_circle(fitting, axis_aligned_bb=True):
     r"""
     Convert a Pico detection to a menpo.shape.PointDirectedGraph.
     This enforces a particular point ordering. The Pico detections are
-    circles with a given diameter. Here we convert them to the tighest
-    possible bounding box around the circle. No orientaton is currently
+    circles with a given diameter. Here we convert them to the tightest
+    possible bounding box around the circle. No orientation is currently
     provided.
 
     Parameters
@@ -25,4 +26,8 @@ def pointgraph_from_circle(fitting):
     y, x = fitting.center
     y -= radius
     x -= radius
-    return bounding_box((y, x), (y + diameter, x + diameter))
+    bb = bounding_box((y, x), (y + diameter, x + diameter))
+    if not axis_aligned_bb:
+        t = rotate_ccw_about_centre(bb, fitting.orientation, degrees=False)
+        bb = t.apply(bb)
+    return bb

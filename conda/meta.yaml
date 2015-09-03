@@ -11,7 +11,7 @@ requirements:
     - python
     - dlib 18.*
     - opencv 2.4.*  # [not py3k]
-    - cypico 0.2*
+    - cypico >=0.2.4,<0.3.0
     - cyffld2 0.1.*
     - menpo 0.5.*
 

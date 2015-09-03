@@ -61,6 +61,9 @@ class _dlib_detect(object):
         bounding_boxes : menpo.shape.PointDirectedGraph
             The detected objects.
         """
+        # Dlib doesn't handle the dead last axis
+        if uint8_image.shape[-1] == 1:
+            uint8_image = uint8_image[..., 0]
         rects = self._dlib_model(uint8_image, n_upscales)
         return [rect_to_pointgraph(r) for r in rects]
 
@@ -75,7 +78,7 @@ class DlibDetector(object):
     def __init__(self, model):
         self._detector = _dlib_detect(model)
 
-    def __call__(self, image, greyscale=True, image_diagonal=None,
+    def __call__(self, image, greyscale=False, image_diagonal=None,
                  group_prefix='dlib', n_upscales=0):
         r"""
         Perform a detection using the cached dlib detector.

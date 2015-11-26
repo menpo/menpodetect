@@ -11,6 +11,20 @@ if on_rtd:
 
     MOCK_MODULES = ['numpy', 'dlib', 'numpy.dtype',
                     'cv2', 'cyffld2', 'cypico']
+    # Menpo modules that need to be mocked
+    MOCK_MODULES += ['scipy', 'PIL', 'sklearn',
+                     'scipy.linalg', 'numpy.stats', 'scipy.misc', 'PIL.Image',
+                     'matplotlib', 'matplotlib.pyplot', 'scipy.spatial',
+                     'scipy.spatial.distance', 'numpy.dtype', 'scipy.ndimage',
+                     'scipy.linalg.blas', 'scipy.sparse', 'cyvlfeat',
+                     'cyvlfeat.sift', 'cyvlfeat.sift.dsift']
+    # Mock menpo Cython as well
+    MOCK_MODULES += ['menpo.transform.piecewiseaffine.fastpwa',
+                     'menpo.feature.windowiterator',
+                     'menpo.shape.mesh.normals',
+                     'menpo.feature.gradient',
+                     'menpo.external.skimage._warps_cy',
+                     'menpo.image.patches']
     for mod_name in MOCK_MODULES:
         sys.modules[mod_name] = MagicMock()
 

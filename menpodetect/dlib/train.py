@@ -1,4 +1,9 @@
-import dlib
+from menpo.base import MenpoMissingDependencyError
+
+try:
+    import dlib
+except ImportError:
+    raise MenpoMissingDependencyError('dlib')
 
 from menpodetect.detect import menpo_image_to_uint8
 from .conversion import pointgraph_to_rect

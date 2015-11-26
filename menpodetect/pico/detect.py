@@ -1,14 +1,18 @@
 from __future__ import division
 from functools import partial
-
+from pathlib import Path
 import numpy as np
 
-from cypico import detect_objects, detect_frontal_faces
-from pathlib import Path
+from menpo.base import MenpoMissingDependencyError
+
+try:
+    from cypico import detect_objects, detect_frontal_faces
+except ImportError:
+    raise MenpoMissingDependencyError('cypico')
 
 from menpodetect.detect import detect
 from menpodetect.compatibility import STRING_TYPES
-from menpodetect.pico.conversion import pointgraph_from_circle
+from .conversion import pointgraph_from_circle
 
 
 class _pico_detect(object):

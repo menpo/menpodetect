@@ -1,8 +1,14 @@
-from cyffld2 import train_model
 import numpy as np
 
+from menpo.base import MenpoMissingDependencyError
+
+try:
+    from cyffld2 import train_model
+except ImportError:
+    raise MenpoMissingDependencyError('cyffld2')
+
+from menpodetect.detect import menpo_image_to_uint8
 from .conversion import ensure_channel_axis
-from ..detect import menpo_image_to_uint8
 
 
 def train_ffld2_detector(positive_images, negative_images, n_components=3,

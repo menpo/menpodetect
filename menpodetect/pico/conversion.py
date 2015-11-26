@@ -1,4 +1,4 @@
-from menpodetect.conversion import bounding_box
+from menpo.shape import bounding_box
 from menpo.transform import rotate_ccw_about_centre
 
 

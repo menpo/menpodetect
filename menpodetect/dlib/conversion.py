@@ -1,5 +1,5 @@
 import dlib
-from menpodetect.conversion import bounding_box
+from menpo.shape import bounding_box
 
 
 def rect_to_pointgraph(rect):

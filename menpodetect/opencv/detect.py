@@ -1,8 +1,13 @@
 from __future__ import division
 from functools import partial
-
-import cv2
 from pathlib import Path
+
+from menpo.base import MenpoMissingDependencyError
+
+try:
+    import cv2
+except ImportError:
+    raise MenpoMissingDependencyError('opencv')
 
 from menpodetect.detect import detect
 from menpodetect.compatibility import STRING_TYPES

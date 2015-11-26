@@ -1,7 +1,7 @@
 from pathlib import Path
 
 from menpodetect.paths import models_dir_path
-from menpodetect.conversion import bounding_box
+from menpo.shape import bounding_box
 
 
 # Paths to the OpenCV shipped with menpodetect

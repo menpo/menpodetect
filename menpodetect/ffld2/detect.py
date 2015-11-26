@@ -1,8 +1,14 @@
 from __future__ import division
 from functools import partial
-
-from cyffld2 import load_model, detect_objects, get_frontal_face_mixture_model
 from pathlib import Path
+
+from menpo.base import MenpoMissingDependencyError
+
+try:
+    from cyffld2 import (load_model, detect_objects,
+                         get_frontal_face_mixture_model)
+except ImportError:
+    raise MenpoMissingDependencyError('cyffld2')
 
 from menpodetect.detect import detect
 from menpodetect.compatibility import STRING_TYPES

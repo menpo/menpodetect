@@ -1,8 +1,13 @@
 from __future__ import division
 from functools import partial
-
-import dlib
 from pathlib import Path
+
+from menpo.base import MenpoMissingDependencyError
+
+try:
+    import dlib
+except ImportError:
+    raise MenpoMissingDependencyError('dlib')
 
 from menpodetect.detect import detect
 from menpodetect.compatibility import STRING_TYPES

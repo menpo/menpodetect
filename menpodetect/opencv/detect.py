@@ -15,10 +15,10 @@ from .conversion import (pointgraph_from_rect, opencv_frontal_face_path,
                          opencv_profile_face_path, opencv_eye_path)
 
 def _get_appropiate_flags():
-    from sys import version_info
-    if version_info.major == 2:
+    version = cv2.__version__.split('.')[0]
+    if version == '2':
         return cv2.cv.CV_HAAR_SCALE_IMAGE
-    elif version_info.major == 3:
+    elif version == '3':
         return cv2.CASCADE_SCALE_IMAGE
 
 

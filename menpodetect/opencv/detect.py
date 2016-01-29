@@ -14,6 +14,13 @@ from menpodetect.compatibility import STRING_TYPES
 from .conversion import (pointgraph_from_rect, opencv_frontal_face_path,
                          opencv_profile_face_path, opencv_eye_path)
 
+def _get_default_flags():
+    version = cv2.__version__.split('.')[0]
+    if version == '2':
+        return cv2.cv.CV_HAAR_SCALE_IMAGE
+    elif version == '3':
+        return cv2.CASCADE_SCALE_IMAGE
+
 
 class _opencv_detect(object):
     r"""
@@ -42,7 +49,7 @@ class _opencv_detect(object):
         self._opencv_model = model
 
     def __call__(self, uint8_image, scale_factor=1.1, min_neighbours=5,
-                 min_size=(30, 30), flags=cv2.cv.CV_HAAR_SCALE_IMAGE):
+                 min_size=(30, 30), flags=None):
         r"""
         Perform a detection using the cached opencv detector.
 
@@ -67,6 +74,8 @@ class _opencv_detect(object):
         bounding_boxes : menpo.shape.PointDirectedGraph
             The detected objects.
         """
+        if flags is None:
+            flags = _get_default_flags()
         rects = self._opencv_model.detectMultiScale(
             uint8_image, scaleFactor=scale_factor, minNeighbors=min_neighbours,
             minSize=min_size, flags=flags)
@@ -85,7 +94,7 @@ class OpenCVDetector(object):
 
     def __call__(self, image, image_diagonal=None, group_prefix='opencv',
                  scale_factor=1.1, min_neighbours=5,
-                 min_size=(30, 30), flags=cv2.cv.CV_HAAR_SCALE_IMAGE):
+                 min_size=(30, 30), flags=None):
         r"""
         Perform a detection using the cached opencv detector.
 
@@ -121,6 +130,8 @@ class OpenCVDetector(object):
         bounding_boxes : `menpo.shape.PointDirectedGraph`
             The detected objects.
         """
+        if flags is None:
+            flags = _get_default_flags()
         detect_partial = partial(self._detector, scale_factor=scale_factor,
                                  min_neighbours=min_neighbours,
                                  min_size=min_size, flags=flags)

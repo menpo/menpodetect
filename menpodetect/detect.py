@@ -18,15 +18,8 @@ def _greyscale(image):
     -------
     image : `menpo.image.Image`
         A greyscale version of the image.
-
-    Raises
-    ------
-    ValueError
-        uint8 images cannot be converted to Greyscale
     """
-    if image.n_channels > 1:
-        if image.pixels.dtype == np.uint8:
-            raise ValueError('uint8 images cannot be converted to greyscale')
+    if image.n_channels != 1:
         if image.n_channels == 3:
             # Use luminosity for RGB images
             image = image.as_greyscale(mode='luminosity')

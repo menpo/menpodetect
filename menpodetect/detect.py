@@ -103,7 +103,8 @@ def detect(detector_callable, image, greyscale=True,
     pcs = detector_callable(menpo_image_to_uint8(d_image))
 
     if image_diagonal is not None:
-        pcs = [UniformScale(1 / scale_factor, n_dims=2).apply(pc) for pc in pcs]
+        s = UniformScale(1 / scale_factor, n_dims=2)
+        pcs = [s.apply(pc) for pc in pcs]
 
     padding_magnitude = len(str(len(pcs)))
     for i, pc in enumerate(pcs):

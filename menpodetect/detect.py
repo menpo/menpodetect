@@ -48,7 +48,7 @@ def menpo_image_to_uint8(image):
     if image.pixels.dtype == np.uint8:
         uint8_im = image.rolled_channels()
     else:
-        uint8_im = np.array(image.as_PILImage())
+        uint8_im = image.as_imageio(out_dtype=np.uint8)
     # Handle the dead axis on greyscale images
     if uint8_im.ndim == 3 and uint8_im.shape[-1] == 1:
         uint8_im = uint8_im[..., 0]

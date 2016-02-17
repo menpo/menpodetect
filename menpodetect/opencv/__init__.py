@@ -10,3 +10,4 @@ except MenpoMissingDependencyError:
 
 # Remove from scope
 del MenpoMissingDependencyError
+

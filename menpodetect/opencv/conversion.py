@@ -30,4 +30,5 @@ def pointgraph_from_rect(rect):
         A menpo PointDirectedGraph giving the bounding box.
     """
     x, y, w, h = rect
-    return bounding_box((y, x), (y + h, x + w))
+    return bounding_box((y, x), (y + h, x + w)
+)

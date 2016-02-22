@@ -29,3 +29,8 @@ notifications:
     on_failure: :change
   email: false
 
+after_success:
+  - ~/miniconda/bin/conda install coveralls -y
+  - cp ~/miniconda/conda-bld/test-tmp_dir/.coverage ./.coverage
+  - ~/miniconda/bin/coveralls
+

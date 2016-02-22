@@ -18,15 +18,8 @@ def _greyscale(image):
     -------
     image : `menpo.image.Image`
         A greyscale version of the image.
-
-    Raises
-    ------
-    ValueError
-        uint8 images cannot be converted to Greyscale
     """
-    if image.n_channels > 1:
-        if image.pixels.dtype == np.uint8:
-            raise ValueError('uint8 images cannot be converted to greyscale')
+    if image.n_channels != 1:
         if image.n_channels == 3:
             # Use luminosity for RGB images
             image = image.as_greyscale(mode='luminosity')
@@ -55,7 +48,7 @@ def menpo_image_to_uint8(image):
     if image.pixels.dtype == np.uint8:
         uint8_im = image.rolled_channels()
     else:
-        uint8_im = np.array(image.as_PILImage())
+        uint8_im = image.as_imageio(out_dtype=np.uint8)
     # Handle the dead axis on greyscale images
     if uint8_im.ndim == 3 and uint8_im.shape[-1] == 1:
         uint8_im = uint8_im[..., 0]
@@ -110,7 +103,8 @@ def detect(detector_callable, image, greyscale=True,
     pcs = detector_callable(menpo_image_to_uint8(d_image))
 
     if image_diagonal is not None:
-        pcs = [UniformScale(1 / scale_factor, n_dims=2).apply(pc) for pc in pcs]
+        s = UniformScale(1 / scale_factor, n_dims=2)
+        pcs = [s.apply(pc) for pc in pcs]
 
     padding_magnitude = len(str(len(pcs)))
     for i, pc in enumerate(pcs):

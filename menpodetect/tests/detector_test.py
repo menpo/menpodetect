@@ -1,9 +1,10 @@
+from mock import MagicMock
+import numpy as np
+from numpy.testing import assert_allclose
+
 from menpo.shape import PointDirectedGraph
 from menpodetect.detect import (detect, menpo_image_to_uint8)
 import menpo.io as mio
-import numpy as np
-from numpy.testing import assert_allclose
-from nose.tools import raises
 
 
 takeo = mio.import_builtin_asset.takeo_ppm()
@@ -33,10 +34,26 @@ def test_passing_uint8_image():
     assert takeo_copy.landmarks['object_0'][None].n_points == 4
 
 
-@raises(ValueError)
-def test_passing_uint8_image_greyscale_raises():
+def test_passing_uint8_image_greyscale():
     takeo_copy = takeo_uint8.copy()
     pcs = detect(fake_detector, takeo_copy, greyscale=True)
+    assert len(pcs) == 1
+
+
+def test_passing_uint8_rgb_image_greyscale_no_convert():
+    fake_image = MagicMock()
+    fake_image.n_channels = 3
+    pcs = detect(fake_detector, fake_image, greyscale=True)
+    assert len(pcs) == 1
+    fake_image.as_greyscale.assert_called_once_with(mode='luminosity')
+
+
+def test_passing_uint8_greyscale_image_greyscale_pass_through():
+    fake_image = MagicMock()
+    fake_image.n_channels = 1
+    pcs = detect(fake_detector, fake_image, greyscale=True)
+    assert len(pcs) == 1
+    fake_image.as_greyscale.assert_not_called()
 
 
 def test_image_to_uint8():

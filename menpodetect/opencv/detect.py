@@ -14,6 +14,7 @@ from menpodetect.compatibility import STRING_TYPES
 from .conversion import (pointgraph_from_rect, opencv_frontal_face_path,
                          opencv_profile_face_path, opencv_eye_path)
 
+
 def _get_default_flags():
     version = cv2.__version__.split('.')[0]
     if version == '2':
@@ -173,3 +174,4 @@ def load_opencv_eye_detector():
         The eye detector.
     """
     return OpenCVDetector(opencv_eye_path)
+

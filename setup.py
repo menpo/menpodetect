@@ -11,5 +11,5 @@ setup(name='menpodetect',
       packages=find_packages(),
       tests_require=['nose'],
       package_data={'menpodetect': ['models/opencv/*.xml']},
-      install_requires=['menpo>=0.6,<0.7'])
+      install_requires=['menpo>=0.7,<0.8'])
 

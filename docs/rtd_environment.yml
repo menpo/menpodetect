@@ -1,0 +1,16 @@
+name: menpodetect_rtd
+channels:
+  - menpo
+dependencies:
+  - python
+  - setuptools
+
+  - menpo >=0.7,<0.8
+  - dlib
+  - cypico
+  - cyffld2
+  - opencv3
+  - pip:
+      - sphinx
+      - sphinx_rtd_theme
+      - sphinxmapxrefrole>0.2

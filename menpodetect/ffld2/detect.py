@@ -65,7 +65,7 @@ class _ffld2_detect(object):
 
         Returns
         ------
-        bounding_boxes : menpo.shape.PointDirectedGraph
+        bounding_boxes : `list` of `menpo.shape.PointDirectedGraph`
             The detected objects.
         """
         # Add the channel to a greyscale image.
@@ -124,7 +124,7 @@ class FFLD2Detector(object):
 
         Returns
         ------
-        bounding_boxes : `menpo.shape.PointDirectedGraph`
+        bounding_boxes : `list` of `menpo.shape.PointDirectedGraph`
             The detected objects.
         """
         detect_partial = partial(self._detector, padding=padding,

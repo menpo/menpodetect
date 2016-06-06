@@ -37,7 +37,7 @@ class _pico_detect(object):
     def __init__(self, model):
         if isinstance(model, STRING_TYPES) or isinstance(model, Path):
             raise ValueError('Loading Pico trained models from disk '
-                                 'is not currently supported.')
+                             'is not currently supported.')
         self._pico_model = model
 
     def __call__(self, uint8_image, max_detections=100, orientations=0.0,
@@ -79,7 +79,7 @@ class _pico_detect(object):
 
         Returns
         ------
-        bounding_boxes : `menpo.shape.PointDirectedGraph`
+        bounding_boxes : `list` of `menpo.shape.PointDirectedGraph`
             The detected objects.
         """
         fittings = detect_objects(
@@ -142,7 +142,7 @@ class _pico_face_detect(_pico_detect):
 
         Returns
         ------
-        bounding_boxes : `menpo.shape.PointDirectedGraph`
+        bounding_boxes : `list` of `menpo.shape.PointDirectedGraph`
             The detected faces.
         """
         fittings = detect_frontal_faces(
@@ -228,7 +228,7 @@ class PicoDetector(object):
 
         Returns
         ------
-        bounding_boxes : menpo.shape.PointDirectedGraph
+        bounding_boxes : `list` of `menpo.shape.PointDirectedGraph`
             The detected objects.
         """
         if degrees:

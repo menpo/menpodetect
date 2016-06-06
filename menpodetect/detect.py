@@ -88,7 +88,7 @@ def detect(detector_callable, image, greyscale=True,
 
     Returns
     -------
-    bounding_boxes : `menpo.shape.PointDirectedGraph`
+    bounding_boxes : `list` of `menpo.shape.PointDirectedGraph`
         A list of bounding boxes representing the detections found.
     """
     d_image = image

@@ -63,7 +63,7 @@ class _dlib_detect(object):
 
         Returns
         ------
-        bounding_boxes : menpo.shape.PointDirectedGraph
+        bounding_boxes : `list` of `menpo.shape.PointDirectedGraph`
             The detected objects.
         """
         # Dlib doesn't handle the dead last axis
@@ -111,7 +111,7 @@ class DlibDetector(object):
 
         Returns
         ------
-        bounding_boxes : `menpo.shape.PointDirectedGraph`
+        bounding_boxes : `list` of `menpo.shape.PointDirectedGraph`
             The detected objects.
         """
         detect_partial = partial(self._detector, n_upscales=n_upscales)

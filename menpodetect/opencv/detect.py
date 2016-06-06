@@ -72,7 +72,7 @@ class _opencv_detect(object):
 
         Returns
         ------
-        bounding_boxes : menpo.shape.PointDirectedGraph
+        bounding_boxes : `list` of `menpo.shape.PointDirectedGraph`
             The detected objects.
         """
         if flags is None:
@@ -128,7 +128,7 @@ class OpenCVDetector(object):
 
         Returns
         ------
-        bounding_boxes : `menpo.shape.PointDirectedGraph`
+        bounding_boxes : `list` of `menpo.shape.PointDirectedGraph`
             The detected objects.
         """
         if flags is None:

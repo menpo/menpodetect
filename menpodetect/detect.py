@@ -58,6 +58,9 @@ def menpo_image_to_uint8(image, channels_at_back=True):
     else:
         from menpo.image.base import denormalize_pixels_range
         uint8_im = denormalize_pixels_range(image.pixels, np.uint8)
+        # Handle the dead axis on greyscale images
+        if uint8_im.ndim == 3 and uint8_im.shape[0] == 1:
+            uint8_im = uint8_im[0]
     return uint8_im
 
 

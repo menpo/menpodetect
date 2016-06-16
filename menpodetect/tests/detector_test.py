@@ -65,6 +65,16 @@ def test_image_to_uint8():
     assert (shi[0] == shnp[2] and shi[1] == shnp[0] and shi[2] == shnp[1])
 
 
+def test_image_to_uint8_greyscale():
+    takeo_copy = takeo.as_greyscale()
+    np_im = menpo_image_to_uint8(takeo_copy)
+    shi = takeo_copy.pixels.shape
+    shnp = np_im.shape
+    assert np_im.ndim == 2
+    assert np_im.dtype == np.uint8
+    assert (shi[1] == shnp[0] and shi[2] == shnp[1])
+
+
 def test_image_to_uint8_channels_at_front():
     takeo_copy = takeo.copy()
     np_im = menpo_image_to_uint8(takeo_copy, channels_at_back=False)
@@ -72,3 +82,13 @@ def test_image_to_uint8_channels_at_front():
     shnp = np_im.shape
     assert np_im.dtype == np.uint8
     assert (shi[0] == shnp[0] and shi[1] == shnp[1] and shi[2] == shnp[2])
+
+
+def test_image_to_uint8_greyscale_channels_at_front():
+    takeo_copy = takeo.as_greyscale()
+    np_im = menpo_image_to_uint8(takeo_copy, channels_at_back=False)
+    shi = takeo_copy.pixels.shape
+    shnp = np_im.shape
+    assert np_im.ndim == 2
+    assert np_im.dtype == np.uint8
+    assert (shi[1] == shnp[0] and shi[2] == shnp[1])

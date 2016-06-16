@@ -1,9 +1,17 @@
-from menpodetect.bob import load_bob_frontal_face_detector
+import unittest
+from menpo.base import MenpoMissingDependencyError
+try:
+    from menpodetect.bob import load_bob_frontal_face_detector
+    MISSING_BOB = False
+except MenpoMissingDependencyError:
+    MISSING_BOB = True
+
 import menpo.io as mio
 
 takeo = mio.import_builtin_asset.takeo_ppm()
 
 
+@unittest.skipIf(MISSING_BOB, "requires bob.ip.facedetect")
 def test_frontal_face_detector():
     takeo_copy = takeo.copy()
     bob_detector = load_bob_frontal_face_detector()
@@ -13,6 +21,7 @@ def test_frontal_face_detector():
     assert takeo_copy.landmarks['bob_0'][None].n_points == 4
 
 
+@unittest.skipIf(MISSING_BOB, "requires bob.ip.facedetect")
 def test_frontal_face_detector_no_result():
     takeo_copy = takeo.copy()
     bob_detector = load_bob_frontal_face_detector()
@@ -20,6 +29,7 @@ def test_frontal_face_detector_no_result():
     assert len(pcs) == 0
 
 
+@unittest.skipIf(MISSING_BOB, "requires bob.ip.facedetect")
 def test_frontal_face_detector_rgb():
     takeo_copy = takeo.copy()
     bob_detector = load_bob_frontal_face_detector()
@@ -29,6 +39,7 @@ def test_frontal_face_detector_rgb():
     assert takeo_copy.landmarks['bob_0'][None].n_points == 4
 
 
+@unittest.skipIf(MISSING_BOB, "requires bob.ip.facedetect")
 def test_frontal_face_detector_threshold():
     takeo_copy = takeo.copy()
     bob_detector = load_bob_frontal_face_detector()
@@ -38,6 +49,7 @@ def test_frontal_face_detector_threshold():
     assert takeo_copy.landmarks['bob_0'][None].n_points == 4
 
 
+@unittest.skipIf(MISSING_BOB, "requires bob.ip.facedetect")
 def test_frontal_face_detector_minimum_overlap():
     takeo_copy = takeo.copy()
     bob_detector = load_bob_frontal_face_detector()

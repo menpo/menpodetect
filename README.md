@@ -36,6 +36,10 @@ integrate nicely with Menpo. At the moment the current libraries are wrapped:
     Frontal face detection using the DPM Baseline model provided by
     [Mathias et. al.](http://markusmathias.bitbucket.org/2014_eccv_face_detection/).
     Training code is also wrapped, but requires explicit negative samples.
+  - **[bob.ip.facedetect](https://pythonhosted.org/bob.ip.facedetect/) (GPL v3)**
+    Frontal face detection based on the PhD thesis of Cosmin Atanasoaei of
+    EPFL based on an ensemble of weak LBP classifiers. **Not currently shipped
+    using conda and therefore must be installed independently.**
 
 Important
 ---------
@@ -62,16 +66,13 @@ to satisfy the dependencies as specified in the meta.yaml BEFORE install.
 
 #### Build Status
 
-|  CI Host |                 OS                |                      Build Status                     |
-|:--------:|:---------------------------------:|:-----------------------------------------------------:|
-| Travis   | Ubuntu 12.04 (x64)                | [![Travis Build Status][travis_shield]][travis]       |
-| Jenkins  | OSX 10.10 (x64)                   | [![Jenkins Build Status][jenkins_shield]][jenkins]    |
-| Appveyor | Windows Server 2012 R2 (x86, x64) | [![Appveyor Build Status][appveyor_shield]][appveyor] |
+|  CI Host |                       OS                  |                      Build Status                     |
+|:--------:|:-----------------------------------------:|:-----------------------------------------------------:|
+| Travis   | Ubuntu 12.04 (x64)                        | [![Travis Build Status][travis_shield]][travis]       |
+| Jenkins  | OSX 10.10 (x64) and Windows 10 (x86, x64) | [![Jenkins Build Status][jenkins_shield]][jenkins]    |
 
 
 [travis]: https://travis-ci.org/menpo/menpodetect
 [travis_shield]: http://img.shields.io/travis/menpo/menpodetect.svg?style=flat
-[appveyor]: https://ci.appveyor.com/project/jabooth/menpodetect
-[appveyor_shield]: https://ci.appveyor.com/api/projects/status/github/menpo/menpodetect?svg=true
 [jenkins]: http://jenkins.menpo.org/view/menpo/job/menpodetect
 [jenkins_shield]: http://jenkins.menpo.org/buildStatus/icon?job=menpodetect

@@ -59,6 +59,12 @@ These projects are as follows:
     OpenCV project. This is only available for Python 2.x due to limitations
     of the OpenCV project. OpenCV implements a Viola-Jones detector
     and provides models for both frontal and profile faces as well as eyes.
+  - `bob.ip.facedetect <https://pythonhosted.org/bob.ip.facedetect/>`_ -
+    Provides the detection capabilities of the Bob detector.
+    This detector is based on the PhD thesis of Cosmin Atanasoaei of
+    EPFL and is comprised of an ensemble of weak LBP classifiers.
+    **Not currently shipped using conda and therefore must be installed
+    independently.**
 
 We would be very happy to see this collection expand, so pull requests
 are very welcome!

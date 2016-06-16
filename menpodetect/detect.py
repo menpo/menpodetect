@@ -30,7 +30,7 @@ def _greyscale(image):
     return image
 
 
-def menpo_image_to_uint8(image):
+def menpo_image_to_uint8(image, channels_at_back=True):
     r"""
     Return the given image as a uint8 array. This is a copy of the image.
 
@@ -39,24 +39,30 @@ def menpo_image_to_uint8(image):
     image : `menpo.image.Image`
         The image to convert. If already uint8, only the channels will be
         rolled to the last axis.
+    channels_at_back : `bool`, optional
+        If ``True``, the image channels are placed onto the last axis (the back)
+        as is common in many imaging packages. This is contrary to the Menpo
+        default where channels are the first axis (at the front).
 
     Returns
     -------
     uint8_image : `ndarray`
-        `uint8` Numpy array, channels as the back (last) axis.
+        `uint8` Numpy array, channels as the back (last) axis if
+        ``channels_at_back == True``.
     """
-    if image.pixels.dtype == np.uint8:
-        uint8_im = image.rolled_channels()
+    if channels_at_back:
+        uint8_im = image.pixels_with_channels_at_back(out_dtype=np.uint8)
+        # Handle the dead axis on greyscale images
+        if uint8_im.ndim == 3 and uint8_im.shape[-1] == 1:
+            uint8_im = uint8_im[..., 0]
     else:
-        uint8_im = image.as_imageio(out_dtype=np.uint8)
-    # Handle the dead axis on greyscale images
-    if uint8_im.ndim == 3 and uint8_im.shape[-1] == 1:
-        uint8_im = uint8_im[..., 0]
+        from menpo.image.base import denormalize_pixels_range
+        uint8_im = denormalize_pixels_range(image.pixels, np.uint8)
     return uint8_im
 
 
 def detect(detector_callable, image, greyscale=True,
-           image_diagonal=None, group_prefix='object'):
+           image_diagonal=None, group_prefix='object', channels_at_back=True):
     r"""
     Apply the general detection framework.
 
@@ -85,6 +91,10 @@ def detect(detector_callable, image, greyscale=True,
         The prefix string to be appended to each each landmark group that is
         stored on the image. Each detection will be stored as group_prefix_#
         where # is a count starting from 0.
+    channels_at_back : `bool`, optional
+        If ``True``, the image channels are placed onto the last axis (the back)
+        as is common in many imaging packages. This is contrary to the Menpo
+        default where channels are the first axis (at the front).
 
     Returns
     -------
@@ -100,7 +110,8 @@ def detect(detector_callable, image, greyscale=True,
         scale_factor = image_diagonal / image.diagonal()
         d_image = d_image.rescale(scale_factor)
 
-    pcs = detector_callable(menpo_image_to_uint8(d_image))
+    pcs = detector_callable(menpo_image_to_uint8(
+        d_image, channels_at_back=channels_at_back))
 
     if image_diagonal is not None:
         s = UniformScale(1 / scale_factor, n_dims=2)

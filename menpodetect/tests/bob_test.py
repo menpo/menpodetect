@@ -1,9 +1,8 @@
 import unittest
-from menpo.base import MenpoMissingDependencyError
 try:
     from menpodetect.bob import load_bob_frontal_face_detector
     MISSING_BOB = False
-except MenpoMissingDependencyError:
+except ImportError:
     MISSING_BOB = True
 
 import menpo.io as mio

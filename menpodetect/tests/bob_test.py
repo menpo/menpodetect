@@ -13,6 +13,13 @@ def test_frontal_face_detector():
     assert takeo_copy.landmarks['bob_0'][None].n_points == 4
 
 
+def test_frontal_face_detector_no_result():
+    takeo_copy = takeo.copy()
+    bob_detector = load_bob_frontal_face_detector()
+    pcs = bob_detector(takeo_copy, threshold=float('inf'))
+    assert len(pcs) == 0
+
+
 def test_frontal_face_detector_rgb():
     takeo_copy = takeo.copy()
     bob_detector = load_bob_frontal_face_detector()

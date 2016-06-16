@@ -64,9 +64,13 @@ class _bob_detect(object):
         bounding_boxes : `list` of `menpo.shape.PointDirectedGraph`
             The detected objects.
         """
-        bbs, confidences = bob.ip.facedetect.detect_all_faces(
+        result = bob.ip.facedetect.detect_all_faces(
             uint8_image, cascade=self._bob_model, threshold=threshold,
             minimum_overlap=minimum_overlap)
+        if result is None:
+            bbs = []
+        else:
+            bbs, confidences = result
         return [bb_to_pointgraph(b) for b in bbs]
 
 

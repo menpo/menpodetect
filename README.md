@@ -71,3 +71,8 @@ to satisfy the dependencies as specified in the meta.yaml BEFORE install.
 [travis_shield]: http://img.shields.io/travis/menpo/menpodetect.svg?style=flat
 [jenkins]: http://jenkins.menpo.org/view/menpo/job/menpodetect
 [jenkins_shield]: http://jenkins.menpo.org/buildStatus/icon?job=menpodetect
+
+
+Documentation
+-------------
+See our documentation on [ReadTheDocs](http://menpodetect.readthedocs.org)

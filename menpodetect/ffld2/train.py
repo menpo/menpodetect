@@ -71,7 +71,7 @@ def train_ffld2_detector(positive_images, negative_images, n_components=3,
         positive_image_arrays.append(image_pixels)
         im_bounding_boxes = []
         for lmark in image.landmarks.values():
-            bb = lmark.lms.bounding_box()
+            bb = lmark.bounding_box()
             height, width = bb.range()
             min_p, max_p = bb.bounds()
             im_bounding_boxes.append(np.array([min_p[1], min_p[0],

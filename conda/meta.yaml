@@ -13,7 +13,7 @@ requirements:
     - opencv3 3.1.*
     - cypico 0.2.*
     - cyffld2 0.2.*
-    - menpo 0.7.*
+    - menpo 0.8.*
 
 test:
   requires:

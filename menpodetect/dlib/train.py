@@ -63,7 +63,7 @@ def train_dlib_detector(images, epsilon=0.01, add_left_right_image_flips=False,
     >>> in_memory_detector = train_dlib_detector(images, verbose_stdout=True)
     >>> in_memory_detector.save('in_memory_detector.svm')
     """
-    rectangles = [[pointgraph_to_rect(lgroup.lms.bounding_box())
+    rectangles = [[pointgraph_to_rect(lgroup.bounding_box())
                   for lgroup in im.landmarks.values()]
                   for im in images]
     image_pixels = [menpo_image_to_uint8(im) for im in images]

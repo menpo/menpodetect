@@ -21,7 +21,7 @@ def test_rescaling_image():
     pcs = detect(fake_detector, takeo_copy, image_diagonal=200)
     assert len(pcs) == 1
     assert takeo_copy.n_channels == 3
-    assert takeo_copy.landmarks['object_0'][None].n_points == 4
+    assert takeo_copy.landmarks['object_0'].n_points == 4
     assert_allclose(takeo_copy.landmarks['object_0'][None].points,
                     fake_box * (1.0 / ratio), atol=10e-2)
 
@@ -31,7 +31,7 @@ def test_passing_uint8_image():
     pcs = detect(fake_detector, takeo_copy, greyscale=False)
     assert len(pcs) == 1
     assert takeo_copy.n_channels == 3
-    assert takeo_copy.landmarks['object_0'][None].n_points == 4
+    assert takeo_copy.landmarks['object_0'].n_points == 4
 
 
 def test_passing_uint8_image_greyscale():

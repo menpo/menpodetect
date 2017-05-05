@@ -22,7 +22,7 @@ def test_rescaling_image():
     assert len(pcs) == 1
     assert takeo_copy.n_channels == 3
     assert takeo_copy.landmarks['object_0'].n_points == 4
-    assert_allclose(takeo_copy.landmarks['object_0'][None].points,
+    assert_allclose(takeo_copy.landmarks['object_0'].points,
                     fake_box * (1.0 / ratio), atol=10e-2)
 
 

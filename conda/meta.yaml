@@ -9,8 +9,8 @@ requirements:
 
   run:
     - python
-    - dlib 18.*
-    - opencv3 3.1.*
+    - dlib >=18.18
+    - opencv3 >=3.1
     - cypico 0.2.*
     - cyffld2 0.2.*
     - menpo 0.8.*

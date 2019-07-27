@@ -12,8 +12,5 @@ core classes available for viewing online.
   :maxdepth: 1
 
   menpodetect/detect/index
-  menpodetect/bob/index
   menpodetect/dlib/index
-  menpodetect/ffld2/index
   menpodetect/opencv/index
-  menpodetect/pico/index

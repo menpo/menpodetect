@@ -44,14 +44,6 @@ Therefore, it relies on a number of existing packages and merely normalizes
 the inputs and outputs so that they are consistent with core Menpo types.
 These projects are as follows:
 
-  - `cypico <https://github.com/menpo/cypico>`_ - Provides the detection
-    capabilities of the Pico detector. This has similar performance to a
-    Viola-Jones detector but allows for in-plane rotation detection (detecting
-    faces that are rotated in the Roll angle).
-  - `cyffld2 <https://github.com/menpo/cyffld2>`_ - Provides the detection
-    capabilities of the FFLD2 project. This is an FFT based DPM detection
-    package. It also ships with the highly performant detector provided by
-    `Mathias et. al <http://markusmathias.bitbucket.org/2014_eccv_face_detection/>`_.
   - `dlib <http://dlib.net>`_ - Provides the detection capabilities of the
     Dlib project. This is a HOG-SVM based detector that will return a very
     low number of false positives.
@@ -59,12 +51,6 @@ These projects are as follows:
     OpenCV project. This is only available for Python 2.x due to limitations
     of the OpenCV project. OpenCV implements a Viola-Jones detector
     and provides models for both frontal and profile faces as well as eyes.
-  - `bob.ip.facedetect <https://pythonhosted.org/bob.ip.facedetect/>`_ -
-    Provides the detection capabilities of the Bob detector.
-    This detector is based on the PhD thesis of Cosmin Atanasoaei of
-    EPFL and is comprised of an ensemble of weak LBP classifiers.
-    **Not currently shipped using conda and therefore must be installed
-    independently.**
 
 We would be very happy to see this collection expand, so pull requests
 are very welcome!

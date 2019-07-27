@@ -2,6 +2,13 @@ package:
   name: menpodetect
   version: {{ environ['CONDACI_VERSION'] }}
 
+source:
+  path: ../
+
+build:
+  number: 0
+  script: python setup.py install --single-version-externally-managed --record=record.txt && python setup.py sdist
+
 requirements:
   build:
     - python
@@ -10,27 +17,28 @@ requirements:
   run:
     - python
     - dlib >=18.18
-    - opencv3 >=3.1
-    - cypico 0.2.*
-    - cyffld2 0.2.*
-    - menpo 0.8.*
+    - opencv >=3.1
+    - menpo>=0.9.0,<0.11.0
 
 test:
   requires:
-    - nose
-    - mock
-    - coverage
+    - pytest >=5.0,<6.0
+    - pytest-cov >=2.0,<3.0
+    - mock >=3.0,<4.0
 
   imports:
     - menpodetect
     - menpodetect.dlib
     - menpodetect.opencv
-    - menpodetect.pico
-    - menpodetect.ffld2
 
   commands:
-    - nosetests menpodetect -v --with-coverage --cover-package=menpodetect
+    - pytest $SP_DIR/menpodetect -v --cov=menpodetect
 
 about:
   home: https://github.com/menpo/menpodetect/
-  license: BSD License
+  license: BSD 3-Clause
+  summary: The Menpo Project Python package for detecting faces
+  description: |
+    MenpoDetect is a Menpo Project package for detecting faces in images.
+  doc_url: https://menpodetect.readthedocs.io/en/stable/
+  dev_url: https://github.com/menpo/menpodetect

@@ -19,8 +19,10 @@ def _get_default_flags():
     version = cv2.__version__.split('.')[0]
     if version == '2':
         return cv2.cv.CV_HAAR_SCALE_IMAGE
-    elif version == '3':
+    elif version == '3' or version == '4':
         return cv2.CASCADE_SCALE_IMAGE
+    else:
+        raise ValueError('Unsupported OpenCV version: {}'.format(version))
 
 
 class _opencv_detect(object):

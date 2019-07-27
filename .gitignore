@@ -55,6 +55,7 @@ target/
 
 # IntelliJ
 *.iml
+.idea/*
 
 # OSX
 .DS_Store

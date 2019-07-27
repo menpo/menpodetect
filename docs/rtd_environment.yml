@@ -1,16 +1,15 @@
 name: menpodetect_rtd
 channels:
-  - menpo
+  - conda-forge
 dependencies:
   - python
   - setuptools
+  - pip
 
-  - menpo >=0.7,<0.8
-  - dlib
-  - cypico
-  - cyffld2
-  - opencv3
+  # Note that dlib and opencv are mocked otherwise readthedocs runs out of
+  # memory setting up the environment
+  - menpo >=0.9,<0.11
   - pip:
-      - sphinx
+      - sphinx >=2,<3
       - sphinx_rtd_theme
-      - sphinxmapxrefrole>0.2
+      - sphinxmapxrefrole >=0.2

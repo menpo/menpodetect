@@ -2,13 +2,11 @@
 <p align="center">
   <img src="menpodetect-logo.png" alt="menpodetect" width="30%"></center>
   <br><br>
-  <a href="https://coveralls.io/r/menpo/menpodetect"><img src="http://img.shields.io/coveralls/menpo/menpodetect.svg?style=flat" alt="Coverage Status"/></a>
   <a href="https://pypi.python.org/pypi/menpodetect"><img src="http://img.shields.io/pypi/v/menpodetect.svg?style=flat" alt="PyPI Release"/></a>
   <a href="https://github.com/menpo/menpodetect/blob/master/LICENSE.txt"><img src="http://img.shields.io/badge/License-BSD-green.svg" alt="BSD License"/></a>
   <br>
-  <img src="https://img.shields.io/badge/Python-2.7-green.svg" alt="Python 2.7 Support"/>
-  <img src="https://img.shields.io/badge/Python-3.4-green.svg" alt="Python 3.4 Support"/>
-  <img src="https://img.shields.io/badge/Python-3.5-green.svg" alt="Python 3.5 Support"/>
+  <img src="https://img.shields.io/badge/Python-3.6-green.svg" alt="Python 3.6 Support"/>
+  <img src="https://img.shields.io/badge/Python-3.7-green.svg" alt="Python 3.7 Support"/>
 </p>
 
 
@@ -24,17 +22,6 @@ integrate nicely with Menpo. At the moment the current libraries are wrapped:
   - **[opencv](http://opencv.org/) (BSD)**
     Frontal face detection, profile face detection, eye detection and arbitrary
     OpenCV cascade files (via loading from disk) are all provided.
-  - **[pico](https://github.com/nenadmarkus/pico) (Academic Only)**
-    Frontal face detection and arbitrary pico models are provided. Loading
-    arbitrary Pico models is likely to be very difficult, however.
-  - **[ffld2](http://charles.dubout.ch/en/index.html) (GNU AGPL)**
-    Frontal face detection using the DPM Baseline model provided by
-    [Mathias et. al.](http://markusmathias.bitbucket.org/2014_eccv_face_detection/).
-    Training code is also wrapped, but requires explicit negative samples.
-  - **[bob.ip.facedetect](https://pythonhosted.org/bob.ip.facedetect/) (GPL v3)**
-    Frontal face detection based on the PhD thesis of Cosmin Atanasoaei of
-    EPFL based on an ensemble of weak LBP classifiers. **Not currently shipped
-    using conda and therefore must be installed independently.**
 
 Important
 ---------
@@ -63,14 +50,11 @@ to satisfy the dependencies as specified in the meta.yaml BEFORE install.
 
 |  CI Host |                       OS                  |                      Build Status                     |
 |:--------:|:-----------------------------------------:|:-----------------------------------------------------:|
-| Travis   | Ubuntu 12.04 (x64)                        | [![Travis Build Status][travis_shield]][travis]       |
-| Jenkins  | OSX 10.10 (x64) and Windows 10 (x86, x64) | [![Jenkins Build Status][jenkins_shield]][jenkins]    |
+| Travis   | Ubuntu 16.04 (x64) and OSX 10.12 (x64)    | [![Travis Build Status][travis_shield]][travis]       |
 
 
 [travis]: https://travis-ci.org/menpo/menpodetect
 [travis_shield]: http://img.shields.io/travis/menpo/menpodetect.svg?style=flat
-[jenkins]: http://jenkins.menpo.org/view/menpo/job/menpodetect
-[jenkins_shield]: http://jenkins.menpo.org/buildStatus/icon?job=menpodetect
 
 
 Documentation

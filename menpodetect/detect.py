@@ -22,11 +22,11 @@ def _greyscale(image):
     if image.n_channels != 1:
         if image.n_channels == 3:
             # Use luminosity for RGB images
-            image = image.as_greyscale(mode='luminosity')
+            image = image.as_greyscale(mode="luminosity")
         else:
             # Fall back to the average of the channels for other kinds
             # of images
-            image = image.as_greyscale(mode='average')
+            image = image.as_greyscale(mode="average")
     return image
 
 
@@ -57,6 +57,7 @@ def menpo_image_to_uint8(image, channels_at_back=True):
             uint8_im = uint8_im[..., 0]
     else:
         from menpo.image.base import denormalize_pixels_range
+
         uint8_im = denormalize_pixels_range(image.pixels, np.uint8)
         # Handle the dead axis on greyscale images
         if uint8_im.ndim == 3 and uint8_im.shape[0] == 1:
@@ -64,8 +65,14 @@ def menpo_image_to_uint8(image, channels_at_back=True):
     return uint8_im
 
 
-def detect(detector_callable, image, greyscale=True,
-           image_diagonal=None, group_prefix='object', channels_at_back=True):
+def detect(
+    detector_callable,
+    image,
+    greyscale=True,
+    image_diagonal=None,
+    group_prefix="object",
+    channels_at_back=True,
+):
     r"""
     Apply the general detection framework.
 
@@ -113,8 +120,9 @@ def detect(detector_callable, image, greyscale=True,
         scale_factor = image_diagonal / image.diagonal()
         d_image = d_image.rescale(scale_factor)
 
-    pcs = detector_callable(menpo_image_to_uint8(
-        d_image, channels_at_back=channels_at_back))
+    pcs = detector_callable(
+        menpo_image_to_uint8(d_image, channels_at_back=channels_at_back)
+    )
 
     if image_diagonal is not None:
         s = UniformScale(1 / scale_factor, n_dims=2)
@@ -122,7 +130,8 @@ def detect(detector_callable, image, greyscale=True,
 
     padding_magnitude = len(str(len(pcs)))
     for i, pc in enumerate(pcs):
-        key = '{prefix}_{num:0{mag}d}'.format(mag=padding_magnitude,
-                                              prefix=group_prefix, num=i)
+        key = "{prefix}_{num:0{mag}d}".format(
+            mag=padding_magnitude, prefix=group_prefix, num=i
+        )
         image.landmarks[key] = pc
     return pcs

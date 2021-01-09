@@ -22,4 +22,4 @@ def models_dir_path():
     path : `str`
         The full path to the models directory of the MenpoDetect package
     """
-    return os.path.join(src_dir_path(), 'models')
+    return os.path.join(src_dir_path(), "models")

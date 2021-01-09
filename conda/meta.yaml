@@ -18,13 +18,13 @@ requirements:
     - python
     - dlib >=18.18
     - opencv >=3.1
-    - menpo>=0.9.0,<0.11.0
+    - menpo >=0.9.0,<0.12.0
 
 test:
   requires:
-    - pytest >=5.0,<6.0
+    - pytest >=6.0,<7.0
     - pytest-cov >=2.0,<3.0
-    - mock >=3.0,<4.0
+    - pytest-mock >=3.0,<4.0
 
   imports:
     - menpodetect

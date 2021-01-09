@@ -7,10 +7,9 @@ from menpo.base import MenpoMissingDependencyError
 try:
     import dlib
 except ImportError:
-    raise MenpoMissingDependencyError('dlib')
+    raise MenpoMissingDependencyError("dlib")
 
 from menpodetect.detect import detect
-from menpodetect.compatibility import STRING_TYPES
 from .conversion import rect_to_pointgraph
 
 
@@ -33,11 +32,12 @@ class _dlib_detect(object):
     ValueError
         If a path was provided and it does not exist.
     """
+
     def __init__(self, model):
-        if isinstance(model, STRING_TYPES) or isinstance(model, Path):
+        if isinstance(model, str) or isinstance(model, Path):
             m_path = Path(model)
             if not Path(m_path).exists():
-                raise ValueError('Model {} does not exist.'.format(m_path))
+                raise ValueError("Model {} does not exist.".format(m_path))
             # There are two different kinds of object detector, the
             # simple_object_detector and the fhog_object_detector, but we
             # can't tell which is which from the file name. Therefore, try one
@@ -80,11 +80,18 @@ class DlibDetector(object):
     Wraps a dlib object detector inside the menpodetect framework and provides
     a clean interface to expose the dlib arguments.
     """
+
     def __init__(self, model):
         self._detector = _dlib_detect(model)
 
-    def __call__(self, image, greyscale=False, image_diagonal=None,
-                 group_prefix='dlib', n_upscales=0):
+    def __call__(
+        self,
+        image,
+        greyscale=False,
+        image_diagonal=None,
+        group_prefix="dlib",
+        n_upscales=0,
+    ):
         r"""
         Perform a detection using the cached dlib detector.
 
@@ -115,8 +122,13 @@ class DlibDetector(object):
             The detected objects.
         """
         detect_partial = partial(self._detector, n_upscales=n_upscales)
-        return detect(detect_partial, image, greyscale=greyscale,
-                      image_diagonal=image_diagonal, group_prefix=group_prefix)
+        return detect(
+            detect_partial,
+            image,
+            greyscale=greyscale,
+            image_diagonal=image_diagonal,
+            group_prefix=group_prefix,
+        )
 
 
 def load_dlib_frontal_face_detector():

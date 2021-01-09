@@ -17,8 +17,7 @@ def rect_to_pointgraph(rect):
     bounding_box : `menpo.shape.PointDirectedGraph`
         A menpo PointDirectedGraph giving the bounding box.
     """
-    return bounding_box((rect.top(), rect.left()),
-                        (rect.bottom(), rect.right()))
+    return bounding_box((rect.top(), rect.left()), (rect.bottom(), rect.right()))
 
 
 def pointgraph_to_rect(pg):
@@ -37,5 +36,6 @@ def pointgraph_to_rect(pg):
         A dlib Rectangle.
     """
     min_p, max_p = pg.bounds()
-    return dlib.rectangle(left=int(min_p[1]), top=int(min_p[0]),
-                          right=int(max_p[1]), bottom=int(max_p[0]))
+    return dlib.rectangle(
+        left=int(min_p[1]), top=int(min_p[0]), right=int(max_p[1]), bottom=int(max_p[0])
+    )

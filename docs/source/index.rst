@@ -27,15 +27,7 @@ provided by OpenCV as follows:
 
 Where we use Menpo to load the images from disk and then detect as many
 faces as possible using OpenCV. The detections are automatically attached
-to each image in the form of a set of landmarks. These are then easily viewed
-within a Jupyter notebook using the MenpoWidgets package:
-
-.. code-block:: python
-
-    %matplotlib inline
-    from menpowidgets import visualize_images
-
-    visualize_images(images)
+to each image in the form of a set of landmarks.
 
 Supported Detectors
 -------------------
@@ -48,8 +40,7 @@ These projects are as follows:
     Dlib project. This is a HOG-SVM based detector that will return a very
     low number of false positives.
   - `OpenCV <http://opencv.org>`_ - Provides the detection capabilities of the
-    OpenCV project. This is only available for Python 2.x due to limitations
-    of the OpenCV project. OpenCV implements a Viola-Jones detector
+    OpenCV project. OpenCV implements a Viola-Jones detector
     and provides models for both frontal and profile faces as well as eyes.
 
 We would be very happy to see this collection expand, so pull requests

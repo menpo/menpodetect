@@ -25,6 +25,7 @@ test:
     - pytest >=6.0,<7.0
     - pytest-cov >=2.0,<3.0
     - pytest-mock >=3.0,<4.0
+    - black >= 20.0
 
   imports:
     - menpodetect

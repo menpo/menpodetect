@@ -1,1 +1,2 @@
 menpodetect/_version.py export-subst
+menpodetect/_static_version.py export-subst

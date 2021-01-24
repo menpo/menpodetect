@@ -10,6 +10,6 @@ dependencies:
   - sphinx_rtd_theme
   # Note that dlib and opencv are mocked otherwise readthedocs runs out of
   # memory setting up the environment
-  -  menpo >=0.9,<0.11
+  -  menpo >=0.9,<0.12
   - pip:
       - sphinxmapxrefrole>=0.2

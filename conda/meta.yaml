@@ -27,13 +27,16 @@ test:
     - pytest-mock >=3.0,<4.0
     - black >= 20.0
 
+  files:
+    - .coveragerc
+
   imports:
     - menpodetect
     - menpodetect.dlib
     - menpodetect.opencv
 
   commands:
-    - pytest $SP_DIR/menpodetect -v --cov=menpodetect
+    - pytest $SP_DIR/menpodetect -v --cov=menpodetect --cov-config .coveragerc
 
 about:
   home: https://github.com/menpo/menpodetect/

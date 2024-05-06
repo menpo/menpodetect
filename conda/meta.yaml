@@ -26,6 +26,7 @@ test:
     - pytest-cov >=2.0,<3.0
     - pytest-mock >=3.0,<4.0
     - black >= 20.0
+    - libopencv *=headless*  # [linux]
 
   files:
     - .coveragerc
@@ -36,7 +37,7 @@ test:
     - menpodetect.opencv
 
   commands:
-    - pytest $SP_DIR/menpodetect -v --cov=menpodetect --cov-config .coveragerc
+    - pytest $SP_DIR/menpodetect -v --cov=menpodetect --cov-conftig .coveragerc
 
 about:
   home: https://github.com/menpo/menpodetect/

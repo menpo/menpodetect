@@ -37,7 +37,7 @@ test:
     - menpodetect.opencv
 
   commands:
-    - pytest $SP_DIR/menpodetect -v --cov=menpodetect --cov-conftig .coveragerc
+    - pytest $SP_DIR/menpodetect -v --cov=menpodetect --cov-config .coveragerc
 
 about:
   home: https://github.com/menpo/menpodetect/

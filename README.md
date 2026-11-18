@@ -34,7 +34,7 @@ Installation
 ------------
 ```
 pip install menpodetect                 # the core, and the Menpo dependencies
-pip install "menpodetect[opencv]"       # + OpenCV face and eye detectors (OpenCV 4)
+pip install "menpodetect[opencv]"       # + OpenCV face and eye detectors (opencv-contrib wheel)
 pip install "menpodetect[dlib]"         # + dlib face detector and training (builds dlib from source: needs cmake)
 ```
 or, from conda-forge (where dlib and OpenCV are prebuilt):

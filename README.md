@@ -5,8 +5,7 @@
   <a href="https://pypi.python.org/pypi/menpodetect"><img src="http://img.shields.io/pypi/v/menpodetect.svg?style=flat" alt="PyPI Release"/></a>
   <a href="https://github.com/menpo/menpodetect/blob/master/LICENSE.txt"><img src="http://img.shields.io/badge/License-BSD-green.svg" alt="BSD License"/></a>
   <br>
-  <img src="https://img.shields.io/badge/Python-3.6-green.svg" alt="Python 3.6 Support"/>
-  <img src="https://img.shields.io/badge/Python-3.7-green.svg" alt="Python 3.7 Support"/>
+  <a href="https://github.com/menpo/menpodetect/actions/workflows/ci.yml"><img src="https://github.com/menpo/menpodetect/actions/workflows/ci.yml/badge.svg" alt="CI"/></a>
 </p>
 
 
@@ -33,29 +32,20 @@ non-academic purposes.
 
 Installation
 ------------
-Here in the Menpo team, we are firm believers in making installation as simple
-as possible. Unfortunately, we are a complex project that relies on satisfying
-a number of complex 3rd party library dependencies. The default Python packing
-environment does not make this an easy task. Therefore, we evangelise the use
-of the conda ecosystem, provided by
-[Anaconda](https://store.continuum.io/cshop/anaconda/). In order to make things
-as simple as possible, we suggest that you use conda too! To try and persuade
-you, go to the [Menpo website](http://www.menpo.io/installation/) to find
-installation instructions for all major platforms.
+```
+pip install menpodetect                 # the core, and the Menpo dependencies
+pip install "menpodetect[opencv]"       # + OpenCV face and eye detectors (OpenCV 4)
+pip install "menpodetect[dlib]"         # + dlib face detector and training (builds dlib from source: needs cmake)
+```
+or, from conda-forge (where dlib and OpenCV are prebuilt):
+```
+conda install -c conda-forge menpodetect dlib opencv
+```
 
-If you want to try pip installing this package, note that you will need
-to satisfy the dependencies as specified in the meta.yaml BEFORE install.
-
-#### Build Status
-
-|  CI Host |                       OS                  |                      Build Status                     |
-|:--------:|:-----------------------------------------:|:-----------------------------------------------------:|
-| Travis   | Ubuntu 16.04 (x64) and OSX 10.12 (x64)    | [![Travis Build Status][travis_shield]][travis]       |
-
-
-[travis]: https://travis-ci.org/menpo/menpodetect
-[travis_shield]: http://img.shields.io/travis/menpo/menpodetect.svg?style=flat
-
+Releases
+--------
+Releases are built and published to PyPI from GitHub Actions by pushing a signed `vX.Y.Z` tag (PyPI
+trusted publishing, no tokens); the version number comes from the tag.
 
 Documentation
 -------------

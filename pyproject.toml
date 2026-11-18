@@ -14,8 +14,9 @@ requires-python = ">=3.10"
 dependencies = ["menpo>=0.12"]
 
 [project.optional-dependencies]
-# OpenCV 5 removed cv2.CascadeClassifier, which the OpenCV detectors are built on
-opencv = ["opencv-python-headless>=4.5,<5"]  # menpodetect.opencv (Haar cascade face and eye detectors)
+# The contrib wheel: OpenCV 5 moved cv2.CascadeClassifier (used by the detectors) out of the main wheel
+# into opencv_contrib, and the contrib wheel for 4.x is a superset of the main one
+opencv = ["opencv-contrib-python-headless>=4.5"]  # menpodetect.opencv (Haar cascade face and eye detectors)
 dlib = ["dlib"]                      # menpodetect.dlib (frontal face detector and training)
 
 [project.urls]

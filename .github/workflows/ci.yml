@@ -1,0 +1,85 @@
+name: CI
+on:
+  push: { branches: [master] }
+  pull_request:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uv sync --group dev
+      - run: uv run ruff check .
+      - run: uv run ruff format --check .
+
+  test:
+    needs: lint
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        python: ["3.10", "3.14"]
+    runs-on: ${{ matrix.os }}
+    env:
+      MPLBACKEND: Agg
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      # OpenCV is installed so its detectors are tested everywhere; dlib (a source build) has its own job
+      - run: uv sync --python ${{ matrix.python }} --group dev --extra opencv
+      - run: uv run pytest -q
+
+  dlib:
+    needs: lint
+    runs-on: ubuntu-latest
+    env:
+      MPLBACKEND: Agg
+      CMAKE_BUILD_PARALLEL_LEVEL: 4   # dlib only ships an sdist: it is built from source here
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with: { enable-cache: true }
+      - run: uv sync --group dev --extra opencv --extra dlib
+      - run: uv run pytest -q
+      - name: Nothing may be skipped when both libraries are installed
+        run: uv run pytest -q -rs | tee pytest.log; ! grep -i skipped pytest.log
+
+  sdist:
+    runs-on: ubuntu-latest
+    env:
+      MPLBACKEND: Agg
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: astral-sh/setup-uv@v5
+      - run: uv build --sdist
+      - name: Build and test from the sdist (conda-forge builds from it; no git)
+        run: |
+          uv venv .venv-sdist
+          uv pip install --python .venv-sdist "$(ls dist/*.tar.gz)[opencv]"
+          cd "$(mktemp -d)"
+          "$GITHUB_WORKSPACE/.venv-sdist/bin/python" -c "import menpodetect; print(menpodetect.__version__)"
+          uv pip install --python "$GITHUB_WORKSPACE/.venv-sdist" pytest pytest-mock
+          "$GITHUB_WORKSPACE/.venv-sdist/bin/python" -m pytest --pyargs menpodetect -q
+
+  docs:
+    runs-on: ubuntu-latest
+    env:
+      READTHEDOCS: "True"   # as on Read the Docs: use the installed menpodetect (and mock dlib and cv2)
+      MPLBACKEND: Agg
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: astral-sh/setup-uv@v5
+      - name: Validate the Read the Docs configuration against its schema
+        run: uvx check-jsonschema --builtin-schema vendor.readthedocs .readthedocs.yaml
+      - name: Install what Read the Docs installs
+        run: |
+          uv venv --python 3.13 .venv-docs
+          uv pip install --python .venv-docs -r docs/requirements.txt .
+      - name: Build the docs
+        run: .venv-docs/bin/python -m sphinx -b html -j auto docs/source docs/_build 2>&1 | tee docs-build.log
+      - name: Autodoc must be able to import everything
+        run: |
+          if grep "autodoc: failed to import" docs-build.log; then exit 1; fi

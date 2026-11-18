@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools>=77", "setuptools-scm>=8"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "menpodetect"
+dynamic = ["version"]
+description = "Object detection for Menpo"
+readme = "README.md"
+license = "BSD-3-Clause"
+license-files = ["LICENSE.txt", "AUTHORS.txt"]
+authors = [{ name = "The Menpo Development Team", email = "hello@menpo.org" }]
+requires-python = ">=3.10"
+dependencies = ["menpo>=0.12"]
+
+[project.optional-dependencies]
+# OpenCV 5 removed cv2.CascadeClassifier, which the OpenCV detectors are built on
+opencv = ["opencv-python-headless>=4.5,<5"]  # menpodetect.opencv (Haar cascade face and eye detectors)
+dlib = ["dlib"]                      # menpodetect.dlib (frontal face detector and training)
+
+[project.urls]
+Homepage = "https://www.menpo.org"
+Source = "https://github.com/menpo/menpodetect"
+Documentation = "https://menpodetect.readthedocs.io/en/stable/"
+
+[dependency-groups]
+dev = ["pytest>=8", "pytest-mock>=3", "ruff"]
+
+[tool.setuptools.packages.find]
+include = ["menpodetect*"]
+
+[tool.setuptools.package-data]
+menpodetect = ["models/opencv/*.xml"]
+
+[tool.setuptools_scm]
+# The version comes from the vX.Y.Z git tag; the generated file replaces the old vendored miniver.
+version_file = "menpodetect/_version.py"
+local_scheme = "no-local-version"
+
+[tool.pytest.ini_options]
+testpaths = ["menpodetect"]
+
+[tool.ruff]
+line-length = 88
+extend-exclude = ["docs", "menpodetect/_version.py"]
+
+[tool.ruff.lint]
+select = ["E9", "F"]
+# the package namespaces re-export names from __init__ files, some via star imports
+ignore = ["F401", "F403", "F405", "F841"]

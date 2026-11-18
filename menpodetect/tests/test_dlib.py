@@ -1,5 +1,9 @@
-from menpodetect.dlib import load_dlib_frontal_face_detector
-import menpo.io as mio
+import pytest
+
+pytest.importorskip("dlib")
+
+from menpodetect.dlib import load_dlib_frontal_face_detector  # noqa: E402
+import menpo.io as mio  # noqa: E402
 
 takeo = mio.import_builtin_asset.takeo_ppm()
 

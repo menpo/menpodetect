@@ -1,8 +1,12 @@
-from menpodetect.opencv import (
+import pytest
+
+pytest.importorskip("cv2")
+
+from menpodetect.opencv import (  # noqa: E402
     load_opencv_frontal_face_detector,
     load_opencv_eye_detector,
 )
-import menpo.io as mio
+import menpo.io as mio  # noqa: E402
 
 takeo = mio.import_builtin_asset.takeo_ppm()
 

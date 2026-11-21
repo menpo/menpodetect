@@ -5,6 +5,26 @@ Changelog
 
 For releases before 0.7.0 see the `GitHub releases <https://github.com/menpo/menpodetect/releases>`_.
 
+0.7.2 (2026/11/21)
+------------------
+
+**Fixed.** The error for a detector whose library is not installed told you to
+``pip install opencv`` (not a PyPI name) or ``conda install dlib``, and was only
+raised by ``import menpodetect.opencv.detect``. ``from menpodetect.opencv import
+OpenCVDetector`` (and the other names, and the same for ``menpodetect.dlib``) just
+said "cannot import name". Asking for any of those names now raises an
+``ImportError`` that says to ``pip install "menpodetect[opencv]"`` (or
+``[dlib]``) and shows the original error. If the library is installed but cannot
+be loaded (OpenCV without ``libGL``, for example), it says so instead of calling it
+missing. Importing ``menpodetect`` itself still works without the libraries, and
+a name that is not one of the detectors is still an ``AttributeError``.
+
+Github Pull Requests
+....................
+- `#26`_ Say which extra to install when OpenCV or dlib cannot be imported (@patricksnape)
+
+.. _#26: https://github.com/menpo/menpodetect/pull/26
+
 0.7.1 (2026/11/19)
 ------------------
 

@@ -51,3 +51,4 @@ are very welcome!
   :hidden:
 
   api/index
+  changelog

@@ -2,12 +2,12 @@ from __future__ import division
 from functools import partial
 from pathlib import Path
 
-from menpo.base import MenpoMissingDependencyError
+from menpodetect._optional import MissingExtraError
 
 try:
     import dlib
-except ImportError:
-    raise MenpoMissingDependencyError("dlib")
+except ImportError as e:
+    raise MissingExtraError("dlib", "dlib", "dlib", e)
 
 from menpodetect.detect import detect
 from .conversion import rect_to_pointgraph

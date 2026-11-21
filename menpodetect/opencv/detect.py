@@ -2,12 +2,12 @@ from __future__ import division
 from functools import partial
 from pathlib import Path
 
-from menpo.base import MenpoMissingDependencyError
+from menpodetect._optional import MissingExtraError
 
 try:
     import cv2
-except ImportError:
-    raise MenpoMissingDependencyError("opencv")
+except ImportError as e:
+    raise MissingExtraError("opencv", "OpenCV", "cv2", e)
 
 from menpodetect.detect import detect
 from .conversion import (
